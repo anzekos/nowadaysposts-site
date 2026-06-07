@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import products from '../data/products.json';
+import { SITE } from '../site.config.mjs';
+
+export function getStaticPaths() {
+  const slugs = [...new Set(products.map((p) => p.categorySlug))];
+  return slugs.map((slug) => {
+    const items = products.filter((p) => p.categorySlug === slug);
+    return {
+      params: { category: slug },
+      props: { items, name: items[0].category },
+    };
+  });
+}
+
+const { items, name } = Astro.props;
+const title = `${name} — ${SITE.name}`;
+const description = `Trending ${name.toLowerCase()} we love, handpicked from top-rated Amazon bestsellers.`;
+---
+
+<Layout title={title} description={description}>
+  <section class="mx-auto max-w-content px-4 py-12">
+    <nav class="mb-4 text-sm text-muted">
+      <a href="/" class="hover:text-ink">Home</a> <span class="px-1">/</span>
+      <span class="text-ink">{name}</span>
+    </nav>
+    <h1 class="font-serif text-4xl font-bold text-ink">{name}</h1>
+    <p class="mt-2 max-w-2xl text-muted">{description}</p>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((p) => <ProductCard product={p} />)}
+    </div>
+  </section>
+</Layout>

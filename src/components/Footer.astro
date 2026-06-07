@@ -1,0 +1,23 @@
+---
+import { SITE } from '../site.config.mjs';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-16 border-t border-black/5 bg-beige/40">
+  <div class="mx-auto max-w-content px-4 py-10 text-sm text-muted">
+    <p class="mb-4 max-w-2xl leading-relaxed">
+      <strong class="text-ink">Affiliate disclosure:</strong> {SITE.disclosureShort}
+      Prices and availability are accurate as of the date/time shown on Amazon and are
+      subject to change. We earn a commission on qualifying purchases at no extra cost to you.
+    </p>
+    <div class="flex flex-wrap gap-x-6 gap-y-2">
+      <a href="/disclosure" class="transition hover:text-ink">Affiliate Disclosure</a>
+      <a href="/privacy" class="transition hover:text-ink">Privacy Policy</a>
+      <a href="/about" class="transition hover:text-ink">About</a>
+    </div>
+    <p class="mt-6 text-xs text-muted/80">
+      © {year} {SITE.name}. As an Amazon Associate we earn from qualifying purchases.
+      Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.
+    </p>
+  </div>
+</footer>

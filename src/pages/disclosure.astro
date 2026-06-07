@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../site.config.mjs';
+---
+
+<Layout title={`Affiliate Disclosure — ${SITE.name}`} description="How we make money and our affiliate relationship with Amazon.">
+  <section class="mx-auto max-w-2xl px-4 py-16">
+    <h1 class="font-serif text-4xl font-bold text-ink">Affiliate Disclosure</h1>
+    <div class="mt-6 space-y-5 leading-relaxed text-muted">
+      <p>
+        {SITE.name} is a participant in the Amazon Services LLC Associates Program, an
+        affiliate advertising program designed to provide a means for sites to earn
+        advertising fees by advertising and linking to Amazon.com.
+      </p>
+      <p>
+        <strong class="text-ink">{SITE.disclosureShort}</strong> When you click a link on
+        this site and make a purchase, we may earn a small commission — at
+        <em>no additional cost to you</em>. This helps us keep curating and running the site.
+      </p>
+      <p>
+        We only feature products we believe are genuinely worth your attention, based on
+        ratings, reviews and overall quality. However, we are not the seller. All purchases,
+        pricing, shipping and returns are handled entirely by Amazon and its third-party
+        sellers.
+      </p>
+      <p>
+        <strong class="text-ink">Pricing:</strong> We do not display live prices on this
+        site. Always check the current price and availability directly on Amazon before
+        buying, as these change frequently.
+      </p>
+      <p>
+        Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.
+      </p>
+    </div>
+  </section>
+</Layout>

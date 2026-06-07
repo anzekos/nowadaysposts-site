@@ -1,0 +1,15 @@
+# Netlify konfiguracija — repo root JE mapa site/ (samostojen repo za stran).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# SPA/statik fallback ni potreben (Astro generira prave poti).
+# Varnostne glave (osnovne):
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

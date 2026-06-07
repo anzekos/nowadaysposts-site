@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { SITE } from '../../site.config.mjs';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Layout title={`Blog — ${SITE.name}`} description="Daily home decor edits: the trending finds we're loving right now.">
+  <section class="mx-auto max-w-content px-4 py-12">
+    <h1 class="font-serif text-4xl font-bold text-ink">The Blog</h1>
+    <p class="mt-2 max-w-2xl text-muted">
+      A fresh edit every day — the trending home decor pieces climbing the bestseller charts.
+    </p>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <a
+          href={`/blog/${post.slug}`}
+          class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-lg"
+        >
+          {post.data.cover && (
+            <img
+              src={post.data.cover}
+              alt={post.data.title}
+              width="600"
+              height="600"
+              loading="lazy"
+              class="aspect-[4/3] w-full object-cover"
+            />
+          )}
+          <div class="flex flex-1 flex-col p-5">
+            <time class="text-xs font-semibold uppercase tracking-wide text-terracotta">
+              {fmt(post.data.date)}
+            </time>
+            <h2 class="mt-2 font-serif text-lg leading-snug text-ink group-hover:underline">
+              {post.data.title}
+            </h2>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-muted">{post.data.description}</p>
+            <span class="mt-4 text-sm font-semibold text-ink group-hover:text-terracotta">
+              Read the edit →
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

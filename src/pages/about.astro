@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../site.config.mjs';
+---
+
+<Layout title={`About — ${SITE.name}`} description={`What ${SITE.name} is and how we pick what we feature.`}>
+  <section class="mx-auto max-w-2xl px-4 py-16">
+    <h1 class="font-serif text-4xl font-bold text-ink">About {SITE.name}</h1>
+    <div class="mt-6 space-y-5 leading-relaxed text-muted">
+      <p>
+        {SITE.name} is a small, independent home-decor discovery site. We dig through
+        thousands of top-rated Amazon bestsellers and surface the pieces that actually look
+        good and earn their reviews — mirrors, curtains, rugs, lighting and cozy finishing
+        touches that make a space feel finished.
+      </p>
+      <p>
+        Every product here is picked for a reason: strong ratings, real reviews, and that
+        "I'd put this in my own home" feeling. We refresh the edit regularly as new trending
+        pieces climb the charts.
+      </p>
+      <p>
+        We're reader-supported. {SITE.disclosureShort} See our
+        <a href="/disclosure" class="text-terracotta underline">affiliate disclosure</a>
+        for the details.
+      </p>
+    </div>
+  </section>
+</Layout>
