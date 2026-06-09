@@ -51,7 +51,7 @@
         });
         const data = await r.json().catch(() => ({}));
         if (r.ok && data.ok) {
-          msg.textContent = "🎉 You're in! Check your inbox for a welcome note.";
+          msg.textContent = "🎉 You're in! Get ready — your inbox is about to get a whole lot prettier. 🏡";
           form.reset();
         } else {
           msg.textContent = data.error || 'Something went wrong. Please try again.';
