@@ -74,9 +74,29 @@ function json(statusCode, body) {
 // Pozdravni email novemu naročniku (Brevo transactional). Best-effort: če manjka
 // BREVO_SENDER_EMAIL, tiho preskoči (prijava vseeno uspe).
 async function sendWelcome(apiKey, email) {
-  const senderEmail = process.env.BREVO_SENDER_EMAIL;
-  if (!senderEmail) return;
-  const senderName = process.env.BREVO_SENDER_NAME || 'NowaDaysPosts';
+  // sender: iz env (če nastavljen), sicer AUTO-DETECT verificiranega senderja iz
+  // Brevo računa (GET /v3/senders) — tako welcome dela tudi brez BREVO_SENDER_EMAIL.
+  let senderEmail = process.env.BREVO_SENDER_EMAIL;
+  let senderName = process.env.BREVO_SENDER_NAME || 'NowaDaysPosts';
+  if (!senderEmail) {
+    try {
+      const sr = await fetch('https://api.brevo.com/v3/senders', {
+        headers: { 'api-key': apiKey, accept: 'application/json' },
+      });
+      if (sr.ok) {
+        const sdata = await sr.json().catch(() => ({}));
+        const list = Array.isArray(sdata.senders) ? sdata.senders : [];
+        const chosen = list.find((s) => s.active) || list[0];
+        if (chosen && chosen.email) {
+          senderEmail = chosen.email;
+          if (chosen.name) senderName = chosen.name;
+        }
+      }
+    } catch {
+      /* welcome je best-effort — ob napaki samo preskoči */
+    }
+  }
+  if (!senderEmail) return; // ni senderja -> preskoči (prijava vseeno uspe)
   const site = (process.env.SITE_URL || 'https://nowadaysposts.netlify.app').replace(/\/$/, '');
   const html = `<!doctype html><html><body style="margin:0;background:#f6f1e9;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f6f1e9;font-family:Arial,sans-serif;"><tr><td align="center" style="padding:28px 14px;">
