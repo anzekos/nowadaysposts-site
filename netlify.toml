@@ -3,6 +3,11 @@
   command = "npm run build"
   publish = "dist"
 
+# Serverless funkcije (newsletter prijava → Brevo). Ključ BREVO_API_KEY +
+# BREVO_LIST_ID nastavi v Netlify dashboard → Environment variables.
+[functions]
+  directory = "netlify/functions"
+
 [build.environment]
   NODE_VERSION = "22"
 
