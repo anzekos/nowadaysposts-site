@@ -44,7 +44,7 @@
       btn.disabled = true;
       msg.textContent = 'Subscribing…';
       try {
-        const r = await fetch('/.netlify/functions/subscribe', {
+        const r = await fetch('/.netlify/functions/subscribe2', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ email }),
