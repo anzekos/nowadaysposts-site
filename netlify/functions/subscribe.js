@@ -47,12 +47,11 @@ exports.handler = async (event) => {
     });
 
     if (resp.status === 201 || resp.status === 204) {
-      let welcome = resp.status === 204 ? 'skipped:existing-contact' : 'pending';
       if (resp.status === 201) {
-        welcome = await sendWelcome(apiKey, email.trim()).catch(
-          (e) => 'error:' + (e && e.message ? e.message : 'unknown'));
+        // nov naročnik -> pozdravni email (best-effort; ne sme zrušiti prijave)
+        await sendWelcome(apiKey, email.trim()).catch(() => {});
       }
-      return json(200, { ok: true, welcome });
+      return json(200, { ok: true });
     }
     const data = await resp.json().catch(() => ({}));
     if (data.code === 'duplicate_parameter') {
