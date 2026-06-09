@@ -10,6 +10,10 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # SITE_URL (javni URL strani) in BREVO_SENDER_NAME ("NowaDaysPosts" = brand) NISTA
+  # skrivnosti, a se njuni vrednosti legitimno pojavita v kodi → izvzemi ju iz Netlify
+  # secrets-scannerja, sicer build pade. Pravi skrivnosti (BREVO_API_KEY ipd.) NISO v repu.
+  SECRETS_SCAN_OMIT_KEYS = "SITE_URL,BREVO_SENDER_NAME"
 
 # SPA/statik fallback ni potreben (Astro generira prave poti).
 # Varnostne glave (osnovne):
