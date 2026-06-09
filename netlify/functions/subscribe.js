@@ -87,8 +87,7 @@ async function sendWelcome(apiKey, email) {
     const list = Array.isArray(sdata.senders) ? sdata.senders : [];
     const chosen = list.find((s) => s.active) || list[0];
     if (chosen && chosen.email) {
-      senderEmail = chosen.email;
-      if (chosen.name) senderName = chosen.name;
+      senderEmail = chosen.email; // vzemi samo verificiran EMAIL; IME pusti brand (NowaDaysPosts)
     }
   } catch (e) {
     return 'senders-error:' + (e && e.message ? e.message : 'unknown');
