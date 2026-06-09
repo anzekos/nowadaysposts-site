@@ -47,11 +47,12 @@ exports.handler = async (event) => {
     });
 
     if (resp.status === 201 || resp.status === 204) {
+      let welcome = resp.status === 204 ? 'skipped:existing-contact' : 'pending';
       if (resp.status === 201) {
-        // nov naročnik -> pošlji pozdravni email (best-effort; ne sme zrušiti prijave)
-        await sendWelcome(apiKey, email.trim()).catch(() => {});
+        welcome = await sendWelcome(apiKey, email.trim()).catch(
+          (e) => 'error:' + (e && e.message ? e.message : 'unknown'));
       }
-      return json(200, { ok: true });
+      return json(200, { ok: true, welcome });
     }
     const data = await resp.json().catch(() => ({}));
     if (data.code === 'duplicate_parameter') {
@@ -74,29 +75,26 @@ function json(statusCode, body) {
 // Pozdravni email novemu naročniku (Brevo transactional). Best-effort: če manjka
 // BREVO_SENDER_EMAIL, tiho preskoči (prijava vseeno uspe).
 async function sendWelcome(apiKey, email) {
-  // sender: iz env (če nastavljen), sicer AUTO-DETECT verificiranega senderja iz
-  // Brevo računa (GET /v3/senders) — tako welcome dela tudi brez BREVO_SENDER_EMAIL.
-  let senderEmail = process.env.BREVO_SENDER_EMAIL;
+  // VEDNO auto-detect verificiranega senderja iz Brevo računa (zanesljivo; brez
+  // tveganja napačnega BREVO_SENDER_EMAIL). Vrne status string za debug.
+  let senderEmail = null;
   let senderName = process.env.BREVO_SENDER_NAME || 'NowaDaysPosts';
-  if (!senderEmail) {
-    try {
-      const sr = await fetch('https://api.brevo.com/v3/senders', {
-        headers: { 'api-key': apiKey, accept: 'application/json' },
-      });
-      if (sr.ok) {
-        const sdata = await sr.json().catch(() => ({}));
-        const list = Array.isArray(sdata.senders) ? sdata.senders : [];
-        const chosen = list.find((s) => s.active) || list[0];
-        if (chosen && chosen.email) {
-          senderEmail = chosen.email;
-          if (chosen.name) senderName = chosen.name;
-        }
-      }
-    } catch {
-      /* welcome je best-effort — ob napaki samo preskoči */
+  try {
+    const sr = await fetch('https://api.brevo.com/v3/senders', {
+      headers: { 'api-key': apiKey, accept: 'application/json' },
+    });
+    if (!sr.ok) return 'senders-http:' + sr.status;
+    const sdata = await sr.json().catch(() => ({}));
+    const list = Array.isArray(sdata.senders) ? sdata.senders : [];
+    const chosen = list.find((s) => s.active) || list[0];
+    if (chosen && chosen.email) {
+      senderEmail = chosen.email;
+      if (chosen.name) senderName = chosen.name;
     }
+  } catch (e) {
+    return 'senders-error:' + (e && e.message ? e.message : 'unknown');
   }
-  if (!senderEmail) return; // ni senderja -> preskoči (prijava vseeno uspe)
+  if (!senderEmail) return 'no-sender';
   const site = (process.env.SITE_URL || 'https://nowadaysposts.netlify.app').replace(/\/$/, '');
   const html = `<!doctype html><html><body style="margin:0;background:#f6f1e9;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f6f1e9;font-family:Arial,sans-serif;"><tr><td align="center" style="padding:28px 14px;">
@@ -112,7 +110,7 @@ async function sendWelcome(apiKey, email) {
       <tr><td align="center" style="font-size:11px;color:#7a716a;padding:20px 10px 0;line-height:1.6;">As an Amazon Associate I earn from qualifying purchases.<br>You signed up at ${senderName}. Not you? Just reply and we'll remove you.</td></tr>
     </table>
   </td></tr></table></body></html>`;
-  await fetch('https://api.brevo.com/v3/smtp/email', {
+  const wr = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: { 'api-key': apiKey, 'content-type': 'application/json', accept: 'application/json' },
     body: JSON.stringify({
@@ -122,4 +120,7 @@ async function sendWelcome(apiKey, email) {
       htmlContent: html,
     }),
   });
+  if (wr.status === 201 || wr.ok) return 'sent:' + senderEmail;
+  const wt = await wr.text().catch(() => '');
+  return 'send-failed:' + wr.status + ':' + wt.slice(0, 140);
 }
