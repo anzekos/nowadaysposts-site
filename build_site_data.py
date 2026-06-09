@@ -60,6 +60,9 @@ CATEGORY = {
 
 # rezerva: ugani kategorijo iz naslova, če ASIN ni v mapi
 KEYWORD_CATEGORY = [
+    (("vase", "flower", "floral", "peony", "peonies", "hydrangea", "baby's breath",
+      "babys breath", "bouquet", "rose", "stems", "eucalyptus", "pampas", "gypsophila"),
+     "Floral Decor"),
     (("mirror",), "Mirrors"),
     (("curtain", "drape", "sheer"), "Curtains"),
     (("rug", "runner", "carpet"), "Rugs"),
