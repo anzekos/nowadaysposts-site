@@ -1,46 +1,66 @@
 ---
-const { product } = Astro.props;
+const { product, eager = false } = Astro.props;
 const rating = product.rating ?? 0;
-const full = Math.floor(rating);
-const half = rating - full >= 0.5;
 // rel="nofollow sponsored" je OBVEZEN za affiliate povezave (Google + Amazon TOS)
 const REL = 'nofollow sponsored noopener';
+
+// badge: "New" (dodano v zadnjih 10 dneh ob buildu), sicer "Top Rated" pri 4.7+
+const ageDays = product.addedAt
+  ? (Date.now() - new Date(product.addedAt).getTime()) / 86400000
+  : Infinity;
+const badge = ageDays <= 10 ? 'New' : rating >= 4.7 ? 'Top Rated' : null;
+const badgeClass = badge === 'New' ? 'bg-terracotta text-white' : 'bg-gold text-ink';
 ---
 
-<article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-lg">
-  <a href={product.link} target="_blank" rel={REL} class="block overflow-hidden">
+<article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-soft ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+  <a href={product.link} target="_blank" rel={REL} class="relative block overflow-hidden">
+    {badge && (
+      <span class={`absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-xs font-semibold shadow-soft ${badgeClass}`}>
+        {badge}
+      </span>
+    )}
     <img
       src={product.image}
       alt={product.title}
       width="600"
       height="600"
-      loading="lazy"
-      class="aspect-square w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+      loading={eager ? 'eager' : 'lazy'}
+      class="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.04]"
     />
   </a>
   <div class="flex flex-1 flex-col p-5">
     <span class="mb-2 text-xs font-semibold uppercase tracking-wide text-terracotta">
       {product.category}
     </span>
-    <h3 class="font-serif text-lg leading-snug text-ink">
+    <h3 class="font-serif text-lg font-medium leading-snug text-ink">
       <a href={product.link} target="_blank" rel={REL} class="hover:underline">
         {product.title}
       </a>
     </h3>
     {product.rating && (
-      <div class="mt-2 flex items-center gap-1.5 text-sm">
-        <span class="text-gold" aria-hidden="true">{'★'.repeat(full)}{half ? '½' : ''}</span>
-        <span class="text-muted">{rating.toFixed(1)}</span>
+      <div class="mt-2 flex items-center gap-2 text-sm">
+        <span class="relative inline-block leading-none" aria-hidden="true">
+          <span class="text-beige">★★★★★</span>
+          <span
+            class="absolute inset-y-0 left-0 overflow-hidden whitespace-nowrap text-gold"
+            style={`width: ${(rating / 5) * 100}%`}
+          >★★★★★</span>
+        </span>
+        <span class="font-medium text-ink">{rating.toFixed(1)}</span>
+        <span class="text-muted">on Amazon</span>
       </div>
     )}
-    <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{product.description}</p>
+    <p class="mt-3 flex-1 text-sm leading-relaxed text-muted line-clamp-3">{product.description}</p>
     <a
       href={product.link}
       target="_blank"
       rel={REL}
-      class="mt-5 inline-flex items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-terracotta"
+      class="mt-5 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-terracotta px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-terracotta-dark"
     >
-      Check price on Amazon →
+      Check price on Amazon
+      <svg class="h-4 w-4 transition group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd" />
+      </svg>
     </a>
   </div>
 </article>

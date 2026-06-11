@@ -1,21 +1,57 @@
 ---
 import { SITE } from '../site.config.mjs';
+import products from '../data/products.json';
+
 const year = new Date().getFullYear();
+
+const catMap = new Map();
+for (const p of products) {
+  const c = catMap.get(p.categorySlug) ?? { slug: p.categorySlug, name: p.category, count: 0 };
+  c.count++;
+  catMap.set(p.categorySlug, c);
+}
+const categories = [...catMap.values()].sort((a, b) => b.count - a.count);
 ---
 
 <footer class="mt-16 border-t border-black/5 bg-beige/40">
-  <div class="mx-auto max-w-content px-4 py-10 text-sm text-muted">
-    <p class="mb-4 max-w-2xl leading-relaxed">
-      <strong class="text-ink">Affiliate disclosure:</strong> {SITE.disclosureShort}
-      Prices and availability are accurate as of the date/time shown on Amazon and are
-      subject to change. We earn a commission on qualifying purchases at no extra cost to you.
-    </p>
-    <div class="flex flex-wrap gap-x-6 gap-y-2">
-      <a href="/disclosure" class="transition hover:text-ink">Affiliate Disclosure</a>
-      <a href="/privacy" class="transition hover:text-ink">Privacy Policy</a>
-      <a href="/about" class="transition hover:text-ink">About</a>
+  <div class="mx-auto max-w-content px-4 py-12">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- brand -->
+      <div class="lg:col-span-2">
+        <p class="font-serif text-xl font-bold text-ink">{SITE.name}</p>
+        <p class="mt-3 max-w-md text-sm leading-relaxed text-muted">
+          {SITE.tagline} We comb through thousands of Amazon bestsellers so you only
+          see the pieces worth your money — every pick rated 4.5★ or higher.
+        </p>
+        <p class="mt-4 max-w-md text-xs leading-relaxed text-muted/80">
+          <strong class="text-muted">Affiliate disclosure:</strong> {SITE.disclosureShort}
+          Prices and availability are accurate as of the date/time shown on Amazon and are
+          subject to change. We earn a commission on qualifying purchases at no extra cost to you.
+        </p>
+      </div>
+      <!-- shop -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink">Shop</p>
+        <ul class="mt-3 space-y-2 text-sm text-muted">
+          <li><a href="/shop" class="transition hover:text-ink">All finds</a></li>
+          {categories.slice(0, 6).map((c) => (
+            <li><a href={`/${c.slug}`} class="transition hover:text-ink">{c.name}</a></li>
+          ))}
+        </ul>
+      </div>
+      <!-- explore -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink">Explore</p>
+        <ul class="mt-3 space-y-2 text-sm text-muted">
+          <li><a href="/" class="transition hover:text-ink">Home</a></li>
+          <li><a href="/blog" class="transition hover:text-ink">Blog</a></li>
+          <li><a href="/about" class="transition hover:text-ink">About</a></li>
+          <li><a href="/disclosure" class="transition hover:text-ink">Affiliate Disclosure</a></li>
+          <li><a href="/privacy" class="transition hover:text-ink">Privacy Policy</a></li>
+        </ul>
+      </div>
     </div>
-    <p class="mt-6 text-xs text-muted/80">
+    <p class="mt-10 border-t border-black/5 pt-6 text-xs text-muted/80">
       © {year} {SITE.name}. As an Amazon Associate we earn from qualifying purchases.
       Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.
     </p>

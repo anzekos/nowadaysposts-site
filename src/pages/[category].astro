@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
+import Newsletter from '../components/Newsletter.astro';
 import products from '../data/products.json';
 import { SITE } from '../site.config.mjs';
 
@@ -16,6 +17,21 @@ export function getStaticPaths() {
 }
 
 const { items, name } = Astro.props;
+const { category } = Astro.params;
+
+// najvišje ocenjeni najprej — najmočnejši produkti na vrhu strani
+const sorted = [...items].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+
+// ostale kategorije za cross-navigacijo
+const otherMap = new Map();
+for (const p of products) {
+  if (p.categorySlug === category) continue;
+  const c = otherMap.get(p.categorySlug) ?? { slug: p.categorySlug, name: p.category, count: 0 };
+  c.count++;
+  otherMap.set(p.categorySlug, c);
+}
+const others = [...otherMap.values()].sort((a, b) => b.count - a.count);
+
 const title = `${name} — ${SITE.name}`;
 const description = `Trending ${name.toLowerCase()} we love, handpicked from top-rated Amazon bestsellers.`;
 ---
@@ -24,13 +40,39 @@ const description = `Trending ${name.toLowerCase()} we love, handpicked from top
   <section class="mx-auto max-w-content px-4 py-12">
     <nav class="mb-4 text-sm text-muted">
       <a href="/" class="hover:text-ink">Home</a> <span class="px-1">/</span>
+      <a href="/shop" class="hover:text-ink">Shop</a> <span class="px-1">/</span>
       <span class="text-ink">{name}</span>
     </nav>
     <h1 class="font-serif text-4xl font-bold text-ink">{name}</h1>
-    <p class="mt-2 max-w-2xl text-muted">{description}</p>
+    <p class="mt-2 max-w-2xl text-muted">
+      {description} Highest-rated first — {items.length} {items.length === 1 ? 'find' : 'finds'}.
+    </p>
+
+    <!-- cross-nav čipi -->
+    <div class="mt-6 flex flex-wrap gap-2.5">
+      <a
+        href="/shop"
+        class="rounded-full border border-ink/15 bg-white px-4 py-2 text-sm font-medium text-ink transition hover:border-terracotta hover:text-terracotta"
+      >
+        ← All finds
+      </a>
+      <span class="rounded-full bg-ink px-4 py-2 text-sm font-medium text-white">
+        {name} ({items.length})
+      </span>
+      {others.map((c) => (
+        <a
+          href={`/${c.slug}`}
+          class="rounded-full border border-ink/15 bg-white px-4 py-2 text-sm font-medium text-ink transition hover:border-terracotta hover:text-terracotta"
+        >
+          {c.name} ({c.count})
+        </a>
+      ))}
+    </div>
 
     <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((p) => <ProductCard product={p} />)}
+      {sorted.map((p, i) => <ProductCard product={p} eager={i < 3} />)}
     </div>
   </section>
+
+  <Newsletter />
 </Layout>

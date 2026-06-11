@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import products from '../data/products.json';
+import { SITE } from '../site.config.mjs';
+
+// kategorije + števec (za filter čipe)
+const catMap = new Map();
+for (const p of products) {
+  const c = catMap.get(p.categorySlug) ?? { slug: p.categorySlug, name: p.category, count: 0 };
+  c.count++;
+  catMap.set(p.categorySlug, c);
+}
+const categories = [...catMap.values()].sort((a, b) => b.count - a.count);
+
+// najnovejši najprej, znotraj istega dne najvišje ocenjeni
+const items = [...products].sort((a, b) => {
+  const byDate = String(b.addedAt ?? '').localeCompare(String(a.addedAt ?? ''));
+  return byDate !== 0 ? byDate : (b.rating ?? 0) - (a.rating ?? 0);
+});
+
+const title = `Shop All Finds — ${SITE.name}`;
+const description = `Every trending home decor find we've curated — ${products.length} top-rated pieces, handpicked from Amazon bestsellers.`;
+---
+
+<Layout title={title} description={description}>
+  <section class="mx-auto max-w-content px-4 py-12">
+    <nav class="mb-4 text-sm text-muted">
+      <a href="/" class="hover:text-ink">Home</a> <span class="px-1">/</span>
+      <span class="text-ink">Shop</span>
+    </nav>
+    <h1 class="font-serif text-4xl font-bold text-ink">Shop all finds</h1>
+    <p class="mt-2 max-w-2xl text-muted">
+      Every piece we've curated, newest first. Only 4.5★+ rated bestsellers make the cut.
+    </p>
+
+    <!-- kategorijski čipi -->
+    <div class="mt-6 flex flex-wrap gap-2.5">
+      <span class="rounded-full bg-ink px-4 py-2 text-sm font-medium text-white">
+        All ({products.length})
+      </span>
+      {categories.map((c) => (
+        <a
+          href={`/${c.slug}`}
+          class="rounded-full border border-ink/15 bg-white px-4 py-2 text-sm font-medium text-ink transition hover:border-terracotta hover:text-terracotta"
+        >
+          {c.name} ({c.count})
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((p, i) => <ProductCard product={p} eager={i < 3} />)}
+    </div>
+  </section>
+</Layout>

@@ -11,14 +11,19 @@ export default {
         ink: '#322f2b',
         muted: '#7a7167',
         terracotta: '#be7456',
+        'terracotta-dark': '#a35d41',
         gold: '#d8aa50',
       },
       fontFamily: {
-        serif: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        serif: ['Fraunces', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
       },
       maxWidth: {
         content: '72rem',
+      },
+      boxShadow: {
+        soft: '0 1px 2px rgba(50,47,43,0.04), 0 8px 24px rgba(50,47,43,0.07)',
+        lift: '0 2px 4px rgba(50,47,43,0.06), 0 16px 40px rgba(50,47,43,0.12)',
       },
     },
   },

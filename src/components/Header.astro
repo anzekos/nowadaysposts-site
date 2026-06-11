@@ -2,30 +2,135 @@
 import { SITE } from '../site.config.mjs';
 import products from '../data/products.json';
 
-// kategorije zgradimo iz produktov (unikatne, po abecedi)
-const categories = [...new Map(
-  products.map((p) => [p.categorySlug, { slug: p.categorySlug, name: p.category }])
-).values()].sort((a, b) => a.name.localeCompare(b.name));
+// kategorije zgradimo iz produktov (po številu produktov, največje najprej)
+const catMap = new Map();
+for (const p of products) {
+  const c = catMap.get(p.categorySlug) ?? { slug: p.categorySlug, name: p.category, count: 0 };
+  c.count++;
+  catMap.set(p.categorySlug, c);
+}
+const categories = [...catMap.values()].sort((a, b) => b.count - a.count);
 ---
 
-<header class="sticky top-0 z-30 border-b border-black/5 bg-cream/90 backdrop-blur">
-  <div class="mx-auto flex max-w-content items-center justify-between gap-4 px-4 py-4">
+<header class="sticky top-0 z-40 border-b border-black/5 bg-cream/90 backdrop-blur">
+  <div class="mx-auto flex max-w-content items-center justify-between gap-4 px-4 py-3.5">
     <a href="/" class="font-serif text-xl font-bold tracking-tight text-ink">
       {SITE.name}
     </a>
-    <nav class="hidden items-center gap-6 text-sm font-medium text-muted md:flex">
+
+    <!-- desktop nav: malo linkov, kategorije pod "Shop" dropdownom -->
+    <nav class="hidden items-center gap-7 text-sm font-medium text-muted md:flex">
       <a href="/" class="transition hover:text-ink">Home</a>
-      {categories.map((c) => (
-        <a href={`/${c.slug}`} class="transition hover:text-ink">{c.name}</a>
-      ))}
+
+      <div class="group relative">
+        <a
+          href="/shop"
+          class="inline-flex items-center gap-1 py-3 transition hover:text-ink"
+          aria-haspopup="true"
+        >
+          Shop
+          <svg class="h-3.5 w-3.5 transition group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        <!-- dropdown panel -->
+        <div class="invisible absolute left-1/2 top-full z-50 w-[26rem] -translate-x-1/2 pt-1 opacity-0 transition duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+          <div class="overflow-hidden rounded-2xl bg-white p-3 shadow-lift ring-1 ring-black/5">
+            <div class="grid grid-cols-2 gap-1">
+              {categories.map((c) => (
+                <a
+                  href={`/${c.slug}`}
+                  class="flex items-baseline justify-between gap-2 rounded-xl px-3.5 py-2.5 text-ink transition hover:bg-cream"
+                >
+                  <span class="font-medium">{c.name}</span>
+                  <span class="text-xs text-muted">{c.count}</span>
+                </a>
+              ))}
+            </div>
+            <a
+              href="/shop"
+              class="mt-2 flex items-center justify-center gap-1 rounded-xl bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-terracotta"
+            >
+              Shop all {products.length} finds →
+            </a>
+          </div>
+        </div>
+      </div>
+
       <a href="/blog" class="transition hover:text-ink">Blog</a>
       <a href="/about" class="transition hover:text-ink">About</a>
     </nav>
+
+    <!-- desktop CTA -->
+    <a
+      href="/shop"
+      class="hidden rounded-full bg-terracotta px-5 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-terracotta-dark md:inline-flex"
+    >
+      Shop bestsellers
+    </a>
+
+    <!-- mobile hamburger -->
+    <button
+      id="menu-toggle"
+      type="button"
+      class="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink transition hover:bg-beige/60 md:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg id="menu-icon-open" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+      <svg id="menu-icon-close" class="hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
   </div>
-  <!-- mobilna kategorijska vrstica -->
-  <div class="flex gap-4 overflow-x-auto px-4 pb-3 text-sm text-muted md:hidden">
-    {categories.map((c) => (
-      <a href={`/${c.slug}`} class="whitespace-nowrap transition hover:text-ink">{c.name}</a>
-    ))}
+
+  <!-- mobile panel -->
+  <div id="mobile-menu" class="hidden border-t border-black/5 bg-cream md:hidden">
+    <div class="mx-auto max-w-content space-y-5 px-4 py-5">
+      <div>
+        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted">Shop by category</p>
+        <div class="grid grid-cols-2 gap-1.5">
+          {categories.map((c) => (
+            <a
+              href={`/${c.slug}`}
+              class="flex items-baseline justify-between gap-2 rounded-xl bg-white px-3.5 py-2.5 text-sm font-medium text-ink ring-1 ring-black/5"
+            >
+              {c.name}
+              <span class="text-xs text-muted">{c.count}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-muted">
+        <a href="/" class="py-1">Home</a>
+        <a href="/blog" class="py-1">Blog</a>
+        <a href="/about" class="py-1">About</a>
+      </div>
+      <a
+        href="/shop"
+        class="flex items-center justify-center rounded-full bg-terracotta px-5 py-3 text-sm font-semibold text-white transition hover:bg-terracotta-dark"
+      >
+        Shop all {products.length} finds →
+      </a>
+    </div>
   </div>
 </header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+  if (toggle && menu && iconOpen && iconClose) {
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden') === false;
+      iconOpen.classList.toggle('hidden', open);
+      iconClose.classList.toggle('hidden', !open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+  }
+</script>
