@@ -1,0 +1,18 @@
+---
+// Google Analytics 4 (gtag.js). Renderira se SAMO, če je SITE.gaId nastavljen,
+// da build ostane varen, dokler ne prilepiš svojega Measurement ID-ja.
+// Measurement ID je javen (vidi se v izvorni kodi strani) — ni skrivnost.
+import { SITE } from '../site.config.mjs';
+const gaId = SITE.gaId;
+---
+{gaId && (
+  <Fragment>
+    <script async is:inline src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+    <script is:inline define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', gaId);
+    </script>
+  </Fragment>
+)}
