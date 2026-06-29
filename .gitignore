@@ -11,3 +11,9 @@ node_modules/
 # (committed by default; uncomment to keep out of git)
 # src/data/products.json
 # public/img/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
