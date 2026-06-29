@@ -2,8 +2,8 @@
 export const SITE = {
   name: 'NowaDaysPosts',
   tagline: 'Trending home decor finds, handpicked daily.',
-  // ob deployu zamenjaj z dejansko Netlify domeno:
-  url: 'https://nowadaysposts.netlify.app',
+  // javni URL strani (Cloudflare Pages). Ob menjavi domene zamenjaj tu:
+  url: 'https://nowadaysposts.pages.dev',
   // Google Analytics 4 Measurement ID (oblika 'G-XXXXXXXXXX'). Pusti prazno = GA izklopljen.
   // Prilepi svoj ID iz GA4 (Admin → Data streams → tvoj stream → Measurement ID).
   gaId: 'G-GMRJSJP144',

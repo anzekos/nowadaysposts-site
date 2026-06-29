@@ -1,5 +1,5 @@
 ---
-// Newsletter prijava — POSTa na Netlify funkcijo /.netlify/functions/subscribe,
+// Newsletter prijava — POSTa na Cloudflare Pages funkcijo /subscribe,
 // ki doda email v Brevo listo. API ključ NI v brskalniku (je v funkciji).
 ---
 
@@ -46,7 +46,7 @@
       btn.disabled = true;
       msg.textContent = 'Subscribing…';
       try {
-        const r = await fetch('/.netlify/functions/subscribe', {
+        const r = await fetch('/subscribe', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ email }),
