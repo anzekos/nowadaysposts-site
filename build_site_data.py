@@ -69,6 +69,8 @@ KEYWORD_CATEGORY = [
     (("lamp", "light", "candle warmer"), "Lighting"),
     (("shelf", "shelves", "wall"), "Wall Decor"),
     (("pillow", "duvet", "blanket", "sheet", "bedding"), "Bedroom"),
+    (("kitchen", "utensil", "dish towel", "table runner", "trivet", "coaster",
+      "cutting board", "coffee bar", "mug", "placemat"), "Kitchen Decor"),
 ]
 
 
