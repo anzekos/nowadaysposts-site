@@ -20,6 +20,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://cozy-nest.n
     <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Pinterest domain verification (claim site) -->
+    <meta name="p:domain_verify" content="cf470fb32429a5413a00f3d11dd0d218" />
     <!-- Open Graph / social -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
