@@ -72,6 +72,28 @@ Operating Agreement. Slike imajo `alt`, `width`/`height` in `loading="lazy"`.
 
 ---
 
+## Druga stvar, ki je samo v Cloudflare nadzorni plosci
+
+**Izklopi Web Analytics** na Pages projektu (Pages → nowadaysposts →
+Settings → Web Analytics → Off).
+
+Cloudflare v vsako stran sam vbrizga `static.cloudflareinsights.com/beacon.min.js`.
+Ker ga vbrizga platforma na strezniku, ga ni mogoce vezati na privolitev — ne
+morem ga ustaviti iz kode. Tekel je torej brez privolitve, poleg GA4, in
+meril isto stvar dvakrat.
+
+Nova CSP ga zdaj blokira, kar je pravi rezultat glede zasebnosti, a pusti
+napako v konzoli na vsaki strani. Ko ga izklopis v nadzorni plosci, napaka
+izgine in `qa-legal.mjs` gre spet v celoti zeleno.
+
+Ce ga vseeno hoces obdrzati, ga je treba **oboje**: dodati
+`https://static.cloudflareinsights.com` v `script-src` in `connect-src` v
+`public/_headers`, in ga popisati v `/privacy` in `/cookies` kot obdelovalca.
+Takrat pa ne drzi vec stavek, da se pred privolitvijo ne nalozi nic — in ta
+stavek je zdaj na obeh straneh.
+
+---
+
 ## Kaj nastavi izven kode
 
 - **GA4 hramba podatkov** na 14 mesecev (Admin → Data Settings → Data
