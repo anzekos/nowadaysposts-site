@@ -1,31 +1,143 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../site.config.mjs';
+
+const updated = '8 September 2026';
+const mail = SITE.contactEmail;
 ---
 
-<Layout title={`Privacy Policy — ${SITE.name}`} description="How this site handles data and cookies.">
+<Layout
+  title={`Privacy Policy — ${SITE.name}`}
+  description="What this site collects, why, who else sees it and how to get it deleted. Written to the GDPR, in plain English."
+>
   <section class="mx-auto max-w-2xl px-4 py-16">
     <h1 class="font-serif text-4xl font-bold text-ink">Privacy Policy</h1>
-    <div class="mt-6 space-y-5 leading-relaxed text-muted">
+    <p class="mt-3 text-sm text-muted">Last updated {updated}</p>
+
+    <div class="prose prose-sm mt-8 max-w-none text-muted prose-headings:font-serif prose-headings:text-ink prose-strong:text-ink prose-a:text-terracotta">
+      <p class="lead">
+        This is a small, one-person site that writes about home decor and links to Amazon. It is not
+        an advertising business and it has no interest in following you around. Here is exactly what
+        happens to your data, in the order it happens.
+      </p>
+
+      <h2>Who is responsible</h2>
       <p>
-        {SITE.name} is a static informational website. We do not ask for, collect, or store
-        personal information such as your name, email or payment details. We have no accounts
-        and no contact forms that store data.
+        {SITE.name} is run by an independent publisher based in Slovenia, in the European Union. For
+        anything on this page, including a request to see or delete your data, write to
+        {mail
+          ? <a href={`mailto:${mail}`}>{mail}</a>
+          : <mark class="rounded bg-terracotta/15 px-1.5 py-0.5 font-mono text-xs text-terracotta-dark">[ contact email ]</mark>}
+        and you will get an answer within one month, as the GDPR requires. That mailbox is the
+        controller&rsquo;s contact point; no data protection officer is appointed, and none is
+        required at this size.
+      </p>
+
+      <h2>Reading the site</h2>
+      <p>
+        You can read every page here without giving anything. There is no account, no login and no
+        contact form. Our host, Cloudflare, keeps ordinary server logs (IP address, browser, the
+        page requested, the time) to keep the site up and to absorb attacks. That is our legitimate
+        interest under Article 6(1)(f) GDPR, and those logs are short-lived.
       </p>
       <p>
-        <strong class="text-ink">Affiliate links &amp; cookies:</strong> When you click an
-        Amazon link on this site, Amazon may set cookies to attribute any resulting purchase
-        to us so we can earn a commission. The handling of that data is governed by
-        <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=468496" rel="nofollow noopener" target="_blank" class="text-terracotta underline">Amazon's Privacy Notice</a>,
-        not ours.
+        The fonts you are reading are served from this domain, not from Google, so your browser
+        never asks Google for them.
+      </p>
+
+      <h2>Analytics, only if you say yes</h2>
+      <p>
+        We would like to know which pages get read. That is Google Analytics 4, and it needs
+        cookies, so it runs on your consent under Article 6(1)(a) GDPR and nothing else. Until you
+        press <em>Accept analytics</em>, the Google script is never downloaded and no request
+        reaches Google at all. Google Consent Mode is set to deny advertising storage permanently,
+        so your visit is never used to build an advertising profile, and IP anonymisation is on.
       </p>
       <p>
-        <strong class="text-ink">Analytics:</strong> If we add privacy-friendly analytics in
-        the future, we'll update this page. We do not sell any data.
+        Google Ireland Limited is the processor, with onward transfer to Google LLC in the United
+        States under the EU&ndash;U.S. Data Privacy Framework. Data is kept 14 months and then
+        deleted. Everything set, and how to withdraw, is on the
+        <a href="/cookies">cookie policy</a> page.
+      </p>
+
+      <h2>The newsletter</h2>
+      <p>
+        If you type your email into the signup box and press subscribe, we store that email so we
+        can send you the newsletter. That is consent under Article 6(1)(a) GDPR, given by you
+        pressing the button after reading what the box says.
+      </p>
+      <ul>
+        <li>
+          <strong>What we hold:</strong> your email address, the date you subscribed, and whether
+          you opened the last few emails.
+        </li>
+        <li>
+          <strong>Who processes it:</strong> Brevo (Sendinblue SAS), a French company, acting as our
+          processor under Article 28 GDPR. Their servers are in the European Union, so your email
+          address does not leave the EEA for this purpose. See
+          <a href="https://www.brevo.com/legal/privacypolicy/" rel="noopener" target="_blank">their privacy policy</a>.
+        </li>
+        <li>
+          <strong>How long:</strong> until you unsubscribe. Every email has a one-click unsubscribe
+          link, and using it deletes you from the list. You can also just write to us.
+        </li>
+        <li>
+          <strong>We never sell or rent the list</strong>, and we do not use it for anything except
+          the newsletter itself.
+        </li>
+      </ul>
+
+      <h2>Amazon links</h2>
+      <p>
+        Every product link here goes to Amazon and carries our affiliate tag. When you click one,
+        Amazon may set its own cookies so a purchase can be attributed to us. That happens on
+        Amazon&rsquo;s side, under
+        <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=468496" rel="nofollow noopener" target="_blank">Amazon&rsquo;s Privacy Notice</a>,
+        and we never see who bought what. We receive only anonymous totals: how many items were
+        ordered and what commission was earned. No names, no addresses, no order details.
       </p>
       <p>
-        Questions? Reach out via the channel listed on our
-        <a href="/about" class="text-terracotta underline">About</a> page.
+        Full detail of the commercial relationship is on the
+        <a href="/disclosure">affiliate disclosure</a> page.
+      </p>
+
+      <h2>Product images</h2>
+      <p>
+        Product photographs are served from Amazon&rsquo;s own image servers, so your browser
+        requests them from Amazon and Amazon sees your IP address for that request. This is how
+        Amazon requires their images to be used, and it happens on every page that shows products.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        Under Chapter III of the GDPR you can ask for a copy of what we hold (Article 15), have it
+        corrected (16), have it deleted (17), have its use restricted (18), have it sent to you in a
+        machine-readable file (20), object to anything based on legitimate interest (21) and
+        withdraw consent at any time (7(3)). One email to the address above starts any of them, and
+        it costs nothing. There is no automated decision-making or profiling here within the meaning
+        of Article 22.
+      </p>
+
+      <h2>If you think we got it wrong</h2>
+      <p>
+        Tell us first, it is usually fixable the same day. But under Article 77 GDPR you can also
+        complain directly to a supervisory authority. In Slovenia that is the
+        <a href="https://www.ip-rs.si/" rel="noopener" target="_blank">Informacijski pooblaščenec</a>,
+        Dunajska cesta 22, 1000 Ljubljana, <a href="mailto:gp.ip@ip-rs.si">gp.ip@ip-rs.si</a>. If you
+        live elsewhere in the EU or EEA, your own national authority works too.
+      </p>
+
+      <h2>Children</h2>
+      <p>
+        This site is written for adults furnishing their own homes. We do not knowingly collect data
+        from anyone under 16. If you believe a child has subscribed, write to us and it will be
+        deleted.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        If we add a tool or change a provider, this page changes with it and the date at the top
+        moves. Older versions are available on request.
       </p>
     </div>
   </section>

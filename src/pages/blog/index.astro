@@ -9,7 +9,7 @@ const posts = (await getCollection('blog')).sort(
 const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Layout title={`Blog — ${SITE.name}`} description="Daily home decor edits: the trending finds we're loving right now.">
+<Layout title={`Blog — ${SITE.name}`} description="A new home decor edit most days: the pieces trending on Pinterest right now, each one checked for a 4.5 star rating or better before it makes the list.">
   <section class="mx-auto max-w-content px-4 py-12">
     <h1 class="font-serif text-4xl font-bold text-ink">The Blog</h1>
     <p class="mt-2 max-w-2xl text-muted">

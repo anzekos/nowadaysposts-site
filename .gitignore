@@ -11,3 +11,6 @@ node_modules/
 # (committed by default; uncomment to keep out of git)
 # src/data/products.json
 # public/img/
+# lokalno preverjanje
+shots/
+.srv.log

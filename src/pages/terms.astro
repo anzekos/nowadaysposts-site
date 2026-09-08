@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../site.config.mjs';
+
+const updated = '8 September 2026';
+const mail = SITE.contactEmail;
+---
+
+<Layout
+  title={`Terms of Use — ${SITE.name}`}
+  description="The terms for using this site: what you may do with it, what we do and do not promise about products and prices, and who you are actually buying from."
+>
+  <section class="mx-auto max-w-2xl px-4 py-16">
+    <h1 class="font-serif text-4xl font-bold text-ink">Terms of Use</h1>
+    <p class="mt-3 text-sm text-muted">Last updated {updated}</p>
+
+    <div class="prose prose-sm mt-8 max-w-none text-muted prose-headings:font-serif prose-headings:text-ink prose-strong:text-ink prose-a:text-terracotta">
+      <p class="lead">
+        Short version: read anything you like, buy nothing from us, and check the price on Amazon
+        before you buy anything there. The rest is detail.
+      </p>
+
+      <h2>Who runs this site</h2>
+      <p>
+        {SITE.name} is published by an independent publisher based in Slovenia, in the European
+        Union. Contact for anything on this page:
+        {mail
+          ? <a href={`mailto:${mail}`}>{mail}</a>
+          : <mark class="rounded bg-terracotta/15 px-1.5 py-0.5 font-mono text-xs text-terracotta-dark">[ contact email ]</mark>}.
+        These details are published because the E-Commerce Directive requires a service provider to
+        be identifiable and directly contactable before you deal with it.
+      </p>
+
+      <h2>Using the site</h2>
+      <p>
+        Read it, print it, send a link to whoever is redecorating. You need no permission from us
+        for any of that. What you may not do is scrape the whole thing and republish it as your own
+        site, or use it in a way that breaks the law or knocks the site over.
+      </p>
+      <p>
+        The written text, the curation and the layout are ours. Product names, product photographs
+        and the Amazon marks belong to their respective owners and are used to identify the products
+        we are pointing you at.
+      </p>
+
+      <h2>We are not the seller</h2>
+      <p>
+        This is important, so it gets its own heading. Nothing is sold here. Every product link goes
+        to Amazon, and any purchase is a contract between you and Amazon or one of its third-party
+        sellers. Payment, delivery, warranty, returns and complaints are entirely theirs, and your
+        consumer rights on that purchase run against them, not against us.
+      </p>
+
+      <h2>Prices, ratings and availability</h2>
+      <p>
+        We deliberately do not show live prices, because they change hourly and a stale price on a
+        blog is worse than none. Ratings and review counts are correct as of the day the page was
+        built and drift afterwards. Availability changes constantly. Always check the current price,
+        rating and availability on Amazon before buying. Anything here is editorial opinion and
+        general information, not advice for your specific situation.
+      </p>
+
+      <h2>How we make money</h2>
+      <p>
+        Through the Amazon Associates programme: if you buy after clicking one of our links, we may
+        earn a commission at no extra cost to you. That is set out in full on the
+        <a href="/disclosure">affiliate disclosure</a> page, and it is disclosed on every page of
+        this site because the law and Amazon both require it. It does not change what we recommend:
+        picks are chosen on rating and quality, not on commission.
+      </p>
+
+      <h2>The newsletter</h2>
+      <p>
+        Subscribing is free and voluntary, and every email carries a one-click unsubscribe that
+        works. We send the newsletter a few times a week and use the list for nothing else. How your
+        email address is handled is in the <a href="/privacy">privacy policy</a>. We may stop
+        sending it at any time.
+      </p>
+
+      <h2>Links to other sites</h2>
+      <p>
+        We link to Amazon and occasionally elsewhere. We do not control those sites and are not
+        responsible for their content or for what they do with your data once you are there.
+      </p>
+
+      <h2>Availability and liability</h2>
+      <p>
+        We would like the site to be up all the time and it very nearly always is, but we do not
+        promise it, and we may change or remove any page without notice. The content is provided as
+        it is. To the extent the law allows, we are not liable for loss arising from relying on
+        information here, from a product bought through a link, or from the site being unavailable.
+      </p>
+      <p>
+        Nothing in these terms limits liability for death or personal injury caused by negligence,
+        for fraud, or for anything else that cannot lawfully be limited, and nothing here takes away
+        the mandatory consumer rights you have under the law of your own country.
+      </p>
+
+      <h2>Law and changes</h2>
+      <p>
+        Slovenian law applies, and if you are a consumer resident elsewhere in the EU you keep the
+        protection of the mandatory rules of your own country. We may update these terms; the
+        version that applies is the one published when you read the site, and the date at the top
+        moves when it changes.
+      </p>
+    </div>
+  </section>
+</Layout>

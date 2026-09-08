@@ -2,12 +2,22 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 import { SITE } from '../site.config.mjs';
 
-const { title, description } = Astro.props;
+/*
+  Pisavi sta gostovani pri nas, ne pri Googlu. Prej sta se vlekli z
+  fonts.googleapis.com, kar je Googlu poslalo obiskovalcev IP se preden je
+  ta karkoli izbral. To je natanko tisto, zaradi cesar so v Nemciji padle
+  sodbe proti vgrajenim Google Fonts.
+*/
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+
+const { title, description, noindex = false } = Astro.props;
 const pageTitle = title ?? `${SITE.name} — ${SITE.tagline}`;
-const pageDesc = description ?? SITE.tagline;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://cozy-nest.netlify.app').href;
+const pageDesc = description ?? SITE.description ?? SITE.tagline;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
 ---
 
 <!doctype html>
@@ -19,6 +29,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://cozy-nest.n
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <!-- Pinterest domain verification (claim site) -->
     <meta name="p:domain_verify" content="cf470fb32429a5413a00f3d11dd0d218" />
@@ -29,12 +40,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://cozy-nest.n
     <meta property="og:description" content={pageDesc} />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <GoogleAnalytics />
   </head>
   <body class="min-h-screen bg-cream font-sans text-ink antialiased">
@@ -43,5 +48,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://cozy-nest.n
       <slot />
     </main>
     <Footer />
+    <ConsentBanner />
   </body>
 </html>

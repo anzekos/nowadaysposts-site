@@ -1,0 +1,71 @@
+---
+/*
+  Prava stran 404.
+
+  Cloudflare Pages brez `404.html` v izhodu servira `index.html` s statusom
+  200 na katerikoli neznan naslov. Google to vidi kot neskoncno mnozico
+  podvojenih strani (soft 404) in kot obiskovalec ne ves, da si zgresil.
+  Astro to datoteko zgradi iz te strani, s cimer je tezava odpravljena.
+*/
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../site.config.mjs';
+import products from '../data/products.json';
+
+// nekaj priljubljenih kategorij kot pot naprej, ne slepa ulica
+const catMap = new Map();
+for (const p of products) {
+  const c = catMap.get(p.categorySlug) ?? { slug: p.categorySlug, name: p.category, count: 0 };
+  c.count++;
+  catMap.set(p.categorySlug, c);
+}
+const categories = [...catMap.values()].sort((a, b) => b.count - a.count).slice(0, 6);
+---
+
+<Layout
+  title={`Page not found — ${SITE.name}`}
+  description="That page has moved or never existed. Here is the way back."
+  noindex
+>
+  <section class="mx-auto flex min-h-[60vh] max-w-2xl flex-col justify-center px-4 py-20">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">Error 404</p>
+    <h1 class="mt-4 font-serif text-4xl font-bold leading-tight text-ink sm:text-5xl">
+      This one is out of stock.
+    </h1>
+    <p class="mt-5 max-w-lg leading-relaxed text-muted">
+      The page you were after has moved or never existed. The finds, happily, are all still here.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href="/"
+        class="inline-flex min-h-11 items-center rounded-full bg-terracotta px-6 py-3 text-sm font-semibold text-white transition hover:bg-terracotta-dark"
+      >
+        Back to the home page
+      </a>
+      <a
+        href="/shop"
+        class="inline-flex min-h-11 items-center rounded-full px-6 py-3 text-sm font-semibold text-ink ring-1 ring-black/15 transition hover:bg-beige/50"
+      >
+        Browse all finds
+      </a>
+    </div>
+
+    {categories.length > 0 && (
+      <div class="mt-12 border-t border-black/5 pt-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink">Popular categories</p>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {categories.map((c) => (
+            <li>
+              <a
+                href={`/${c.slug}`}
+                class="inline-flex min-h-11 items-center rounded-full bg-white px-4 py-2 text-sm text-muted ring-1 ring-black/5 transition hover:text-ink"
+              >
+                {c.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </section>
+</Layout>

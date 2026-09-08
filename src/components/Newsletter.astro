@@ -5,7 +5,7 @@
 
 <section class="mx-auto max-w-content px-4 py-12">
   <div class="rounded-3xl bg-ink px-6 py-10 text-center shadow-lift sm:px-12 sm:py-14">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">Free · a few times a week</p>
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta-light">Free · a few times a week</p>
     <h2 class="mt-3 font-serif text-3xl font-bold text-white">Never miss the find everyone's pinning</h2>
     <p class="mx-auto mt-3 max-w-xl text-white/70">
       The prettiest trending home pieces, hand-picked and sent straight to your inbox —
@@ -30,6 +30,19 @@
       </button>
     </form>
     <p id="newsletter-msg" class="mt-3 min-h-[1.25rem] text-sm text-white/80" role="status" aria-live="polite"></p>
+
+    {/*
+      GDPR clen 13: obvestilo mora biti dano ob zbiranju, ne sele na pravni
+      strani. Privolitev je dana s pritiskom na gumb, zato mora tik ob gumbu
+      pisati, kdo obdeluje naslov in kako se od tega odjavis.
+    */}
+    <p class="mx-auto mt-4 max-w-md text-xs leading-relaxed text-white/70">
+      By subscribing you agree we may email you the newsletter. Your address is stored with
+      <a href="https://www.brevo.com/legal/privacypolicy/" rel="noopener" target="_blank" class="underline hover:text-white">Brevo</a>
+      on servers in the EU, used for nothing else, and deleted the moment you unsubscribe. One click
+      in any email does that. More in our
+      <a href="/privacy" class="underline hover:text-white">privacy policy</a>.
+    </p>
   </div>
 </section>
 

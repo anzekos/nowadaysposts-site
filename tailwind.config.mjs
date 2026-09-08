@@ -9,14 +9,21 @@ export default {
         cream: '#f6f1e9',
         beige: '#e8ded1',
         ink: '#322f2b',
-        muted: '#7a7167',
-        terracotta: '#be7456',
-        'terracotta-dark': '#a35d41',
+        // Bilo #7a7167 = 3,97:1 na bezu. Pod WCAG AA (1.4.3) za navadno besedilo.
+        muted: '#6b625a',
+        // Bilo #be7456. Belo besedilo na njem je dalo 3,6:1, isti odtenek kot
+        // besedilo na belem prav tako 3,6:1. Ta odtenek zdrzi 4,5:1 v obe
+        // smeri in tudi na kremni ter bez podlagi.
+        terracotta: '#9c5438',
+        'terracotta-dark': '#7f4229',
+        // Za akcentno besedilo NA temni podlagi (#322f2b). Tam temnejsi
+        // odtenek pade na 2,4:1, zato rabimo svetlejsega.
+        'terracotta-light': '#e0a184',
         gold: '#d8aa50',
       },
       fontFamily: {
-        serif: ['Fraunces', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        serif: ['Fraunces Variable', 'Fraunces', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        sans: ['Inter Variable', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
       },
       maxWidth: {
         content: '72rem',

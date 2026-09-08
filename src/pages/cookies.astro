@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../site.config.mjs';
+
+const updated = '8 September 2026';
+
+const rows = [
+  {
+    name: 'ndp_consent',
+    who: `${SITE.name} (this site)`,
+    what: 'Remembers whether you allowed analytics, so we stop asking. Stored in local storage, never sent to our server.',
+    how: '6 months',
+    cat: 'Strictly necessary',
+  },
+  {
+    name: '_ga',
+    who: 'Google Analytics',
+    what: 'Tells one visitor apart from another so we can count readers. Only written after you accept.',
+    how: '2 years',
+    cat: 'Analytics, consent required',
+  },
+  {
+    name: `_ga_${(SITE.gaId || '').replace('G-', '')}`,
+    who: 'Google Analytics',
+    what: 'Keeps the state of your visit for the same counting. Only written after you accept.',
+    how: '2 years',
+    cat: 'Analytics, consent required',
+  },
+];
+---
+
+<Layout
+  title={`Cookie Policy — ${SITE.name}`}
+  description="Every cookie this site can set, who sets it and how long it lasts. Nothing is stored until you choose, and you can change your mind any time."
+>
+  <section class="mx-auto max-w-3xl px-4 py-16">
+    <h1 class="font-serif text-4xl font-bold text-ink">Cookie Policy</h1>
+    <p class="mt-3 text-sm text-muted">Last updated {updated}</p>
+
+    <div class="prose prose-sm mt-8 max-w-none text-muted prose-headings:font-serif prose-headings:text-ink prose-strong:text-ink prose-a:text-terracotta">
+      <p class="lead">
+        Three cookies exist on this whole site, and two of them only appear if you say yes.
+      </p>
+
+      <h2>The rule we follow</h2>
+      <p>
+        Article 5(3) of the ePrivacy Directive says nothing may be stored on or read from your
+        device without your prior consent, unless it is strictly necessary for what you asked for.
+        That is not a formality here, it is how the site is built:
+      </p>
+      <ul>
+        <li>On your first page view, no analytics script is downloaded. Not one request reaches Google.</li>
+        <li>
+          You are asked once. <em>Only necessary</em> and <em>Accept analytics</em> are the same
+          size, side by side, one click each. Neither is hidden behind a second screen.
+        </li>
+        <li>Closing the banner without choosing is not a yes. Nothing loads until you pick one.</li>
+        <li>Withdrawing is exactly as easy as agreeing, from the button below or in the footer.</li>
+      </ul>
+    </div>
+
+    {/*
+      Vodoravno drsljiv blok mora biti fokusabilen, sicer ga uporabnik s
+      tipkovnico ne more premakniti (axe: scrollable-region-focusable).
+    */}
+    <div class="mt-10 overflow-x-auto" tabindex="0" role="group" aria-label="Cookies set by this site">
+      <table class="w-full min-w-[42rem] border-collapse text-left text-sm">
+        <thead>
+          <tr class="border-b border-black/10">
+            <th scope="col" class="py-3 pr-4 text-xs font-semibold uppercase tracking-wide text-ink">Name</th>
+            <th scope="col" class="py-3 pr-4 text-xs font-semibold uppercase tracking-wide text-ink">Set by</th>
+            <th scope="col" class="py-3 pr-4 text-xs font-semibold uppercase tracking-wide text-ink">What it does</th>
+            <th scope="col" class="py-3 pr-4 text-xs font-semibold uppercase tracking-wide text-ink">How long</th>
+            <th scope="col" class="py-3 text-xs font-semibold uppercase tracking-wide text-ink">Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr class="border-b border-black/5 align-top">
+              <td class="py-4 pr-4 font-mono text-xs text-ink">{r.name}</td>
+              <td class="py-4 pr-4 text-muted">{r.who}</td>
+              <td class="py-4 pr-4 text-muted">{r.what}</td>
+              <td class="py-4 pr-4 text-muted">{r.how}</td>
+              <td class="py-4 text-muted">{r.cat}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose prose-sm mt-10 max-w-none text-muted prose-headings:font-serif prose-headings:text-ink prose-strong:text-ink prose-a:text-terracotta">
+      <h2>What this site deliberately does not do</h2>
+      <ul>
+        <li>No advertising cookies, no remarketing pixels, no Meta or TikTok pixel.</li>
+        <li>No cross-site tracking, and no sharing of your visit with any ad network.</li>
+        <li>
+          No web fonts fetched from Google. They are compiled into the site and served from this
+          domain, so your browser never asks Google for them.
+        </li>
+        <li>No chat widget, no heatmaps, no session recording.</li>
+      </ul>
+
+      <h2>Amazon, when you click a link</h2>
+      <p>
+        Product links carry our affiliate tag. Clicking one takes you to Amazon, and Amazon may then
+        set its own cookies so a purchase can be credited to us. Those cookies are set by Amazon on
+        Amazon&rsquo;s domain, after you have chosen to go there, under
+        <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=468496" rel="nofollow noopener" target="_blank">Amazon&rsquo;s Privacy Notice</a>.
+        Nothing about that is under our control and no Amazon cookie is set while you stay here.
+      </p>
+      <p>
+        Product images are loaded from Amazon&rsquo;s image servers, so Amazon sees your IP address
+        for those requests even before you click. That is a condition of using their images.
+      </p>
+
+      <h2>Changing your mind</h2>
+      <p>One button, any time. It reopens the same panel you saw on your first visit.</p>
+    </div>
+
+    <button
+      type="button"
+      onclick="window.__ndpOpenConsent && window.__ndpOpenConsent()"
+      class="mt-4 inline-flex min-h-11 items-center rounded-full bg-terracotta px-6 py-3 text-sm font-semibold text-white transition hover:bg-terracotta-dark"
+    >
+      Cookie settings
+    </button>
+
+    <div class="prose prose-sm mt-8 max-w-none text-muted prose-a:text-terracotta">
+      <p>
+        You can also clear everything from the browser itself, under Settings, then Privacy, then
+        site data. That removes your stored answer too, so the question comes back next visit. We
+        ask again after six months in any case.
+      </p>
+      <p>
+        Anything on this page, or anything you find in your browser that is not listed here, goes to
+        the address on our <a href="/privacy">privacy policy</a>.
+      </p>
+    </div>
+  </section>
+</Layout>

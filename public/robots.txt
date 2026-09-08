@@ -1,0 +1,8 @@
+# NowaDaysPosts
+User-agent: *
+Allow: /
+
+# Cloudflare Pages funkcija, ki sprejema samo POST. Ni kaj indeksirati.
+Disallow: /subscribe
+
+Sitemap: https://nowadaysposts.pages.dev/sitemap-index.xml

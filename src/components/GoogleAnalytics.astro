@@ -1,18 +1,46 @@
 ---
-// Google Analytics 4 (gtag.js). Renderira se SAMO, če je SITE.gaId nastavljen,
-// da build ostane varen, dokler ne prilepiš svojega Measurement ID-ja.
-// Measurement ID je javen (vidi se v izvorni kodi strani) — ni skrivnost.
+/**
+ * Google Analytics 4, vklopljen šele po privolitvi.
+ *
+ * Prej se je gtag.js nalagal ob vsakem obisku. To je kršilo člen 5(3)
+ * direktive o zasebnosti in elektronskih komunikacijah: piškotek za merjenje
+ * obiska ni nujno potreben za delovanje strani, zato ga brez privolitve ne
+ * smemo postaviti, in skripte niti prenesti.
+ *
+ * Zdaj se v <head> postavi samo Consent Mode v2 s privzetim "denied", kar je
+ * navaden inline stub in ne pošlje nikamor ničesar. Sam gtag.js naloži
+ * `window.__ndpLoadAnalytics()`, ki ga pokliče pasica ob privolitvi.
+ *
+ * Measurement ID je javen (vidi se v izvorni kodi strani) — ni skrivnost.
+ */
 import { SITE } from '../site.config.mjs';
 const gaId = SITE.gaId;
 ---
 {gaId && (
-  <Fragment>
-    <script async is:inline src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-    <script is:inline define:vars={{ gaId }}>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
+  <script is:inline define:vars={{ gaId }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500,
+    });
+
+    var loaded = false;
+    window.__ndpLoadAnalytics = function () {
+      if (loaded) return;
+      loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+      document.head.appendChild(s);
       gtag('js', new Date());
-      gtag('config', gaId);
-    </script>
-  </Fragment>
+      gtag('config', gaId, { anonymize_ip: true });
+    };
+  </script>
 )}

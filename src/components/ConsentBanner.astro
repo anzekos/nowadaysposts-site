@@ -1,0 +1,174 @@
+---
+/**
+ * Pasica za privolitev v piškotke.
+ *
+ * Dve pravili, ki ju ne smemo kršiti:
+ * 1. "Only necessary" je enako viden in enako lahko dosegljiv kot "Accept".
+ * 2. Nič analitičnega se ne naloži, dokler obiskovalec ne izbere. Zapiranje
+ *    brez izbire NE pomeni privolitve.
+ *
+ * Izbira živi v localStorage pod `ndp_consent`, ne v piškotku, zato pred
+ * privolitvijo na napravo ne zapišemo ničesar, kar bi bilo treba prijaviti.
+ */
+---
+
+<div
+  id="consent-banner"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="consent-title"
+  hidden
+  class="fixed inset-x-0 bottom-0 z-50 px-3 pb-3 sm:px-5 sm:pb-5"
+>
+  <div class="mx-auto max-w-2xl rounded-3xl bg-white p-6 shadow-lift ring-1 ring-black/5 sm:p-7">
+    <h2 id="consent-title" class="font-serif text-xl font-bold text-ink">
+      A quick word about cookies
+    </h2>
+    <p class="mt-2 text-sm leading-relaxed text-muted">
+      This site works with nothing from you. We would like to count visits with Google Analytics so
+      we know which finds are worth writing about. That sets cookies, so it only happens if you say
+      yes. Nothing loads before you choose.
+    </p>
+
+    <div class="mt-5 space-y-2 border-t border-black/5 pt-4">
+      <div class="flex items-center justify-between gap-4 rounded-2xl bg-cream px-4 py-3">
+        <div>
+          <p class="text-sm font-medium text-ink">Strictly necessary</p>
+          <p class="mt-0.5 text-xs text-muted">Only your answer to this question.</p>
+        </div>
+        <span class="shrink-0 text-xs text-muted">Always on</span>
+      </div>
+
+      <label class="flex cursor-pointer items-center justify-between gap-4 rounded-2xl px-4 py-3 transition hover:bg-cream">
+        <span>
+          <span class="block text-sm font-medium text-ink">Analytics</span>
+          <span class="mt-0.5 block text-xs text-muted">Google Analytics, two cookies, two years.</span>
+        </span>
+        <input
+          id="consent-analytics"
+          type="checkbox"
+          class="h-5 w-5 shrink-0 cursor-pointer rounded accent-[#be7456]"
+        />
+      </label>
+    </div>
+
+    <div class="mt-5 flex flex-col gap-2.5 sm:flex-row">
+      <button
+        type="button"
+        id="consent-reject"
+        class="min-h-11 flex-1 rounded-full px-5 py-3 text-sm font-semibold text-ink ring-1 ring-black/15 transition hover:bg-cream"
+      >
+        Only necessary
+      </button>
+      <button
+        type="button"
+        id="consent-accept"
+        class="min-h-11 flex-1 rounded-full bg-terracotta px-5 py-3 text-sm font-semibold text-white transition hover:bg-terracotta-dark"
+      >
+        Accept analytics
+      </button>
+      <button
+        type="button"
+        id="consent-save"
+        hidden
+        class="min-h-11 flex-1 rounded-full px-5 py-3 text-sm font-semibold text-terracotta ring-1 ring-[#be7456]/40 transition hover:bg-cream"
+      >
+        Save my choice
+      </button>
+    </div>
+
+    <p class="mt-4 text-xs text-muted">
+      Change this any time from the footer.
+      <a href="/cookies" class="underline hover:text-ink">Cookie policy</a> ·
+      <a href="/privacy" class="underline hover:text-ink">Privacy policy</a>
+    </p>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = 'ndp_consent';
+    var VERSION = 1;
+    var MAX_AGE = 180 * 24 * 60 * 60 * 1000; // 6 mesecev, potem vprašamo znova
+
+    var banner = document.getElementById('consent-banner');
+    var toggle = document.getElementById('consent-analytics');
+    var saveBtn = document.getElementById('consent-save');
+
+    function read() {
+      try {
+        var raw = localStorage.getItem(KEY);
+        if (!raw) return null;
+        var p = JSON.parse(raw);
+        if (p.v !== VERSION) return null;
+        if (Date.now() - new Date(p.at).getTime() > MAX_AGE) return null;
+        return { analytics: p.analytics === true };
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function apply(state) {
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          analytics_storage: state.analytics ? 'granted' : 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+        });
+      }
+      if (state.analytics) window.__ndpLoadAnalytics && window.__ndpLoadAnalytics();
+    }
+
+    function save(state) {
+      try {
+        localStorage.setItem(
+          KEY,
+          JSON.stringify({ analytics: state.analytics, at: new Date().toISOString(), v: VERSION })
+        );
+      } catch (e) {
+        /* zasebno okno: izbira velja samo za to sejo */
+      }
+      banner.hidden = true;
+      apply(state);
+    }
+
+    function open() {
+      var cur = read();
+      toggle.checked = !!(cur && cur.analytics);
+      saveBtn.hidden = true;
+      banner.hidden = false;
+    }
+
+    // gumb v nogi
+    window.__ndpOpenConsent = open;
+
+    var stored = read();
+    if (stored) {
+      apply(stored);
+    } else {
+      open();
+    }
+
+    // "Save my choice" se pokaže šele, ko obiskovalec premakne stikalo
+    toggle.addEventListener('change', function () {
+      var cur = read();
+      saveBtn.hidden = toggle.checked === !!(cur && cur.analytics);
+    });
+
+    document.getElementById('consent-reject').addEventListener('click', function () {
+      save({ analytics: false });
+    });
+    document.getElementById('consent-accept').addEventListener('click', function () {
+      save({ analytics: true });
+    });
+    saveBtn.addEventListener('click', function () {
+      save({ analytics: toggle.checked });
+    });
+
+    // Escape zapre samo, če izbira že obstaja. Sicer bi bilo tiho zavračanje.
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !banner.hidden && read()) banner.hidden = true;
+    });
+  })();
+</script>
