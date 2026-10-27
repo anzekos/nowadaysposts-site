@@ -17,7 +17,7 @@ We picked one well-reviewed find per trend. Five pieces, five rooms, zero renova
 
 ## 1. Home inspiration, bottled
 
-**A whitewashed ceramic vase trio.** The "home inspiration" shot that gets saved a hundred times is almost always the same: textured pottery, dried stems, warm wood. These three rustic jug vases — each a different height, each with a little hand-formed handle, all in a chalky vintage finish — are that shot in a box. Nearly 700 reviewers rate them 4.7 stars for looking far more expensive than they are. Pampas in the tall one, dried daisies in the small one, done.
+**A whitewashed ceramic vase trio.** The "home inspiration" shot that gets saved a hundred times is almost always the same: textured pottery, dried stems, warm wood. These three rustic jug vases — each a different height, each with a little hand-formed handle, all in a chalky vintage finish — are that shot in a box. Pampas in the tall one, dried daisies in the small one, done.
 
 ## 2. The black nouveau bedroom
 
@@ -25,15 +25,15 @@ We picked one well-reviewed find per trend. Five pieces, five rooms, zero renova
 
 ## 3. Apartment rooms, renter edition
 
-**No-drill hanging shelves with fairy lights.** The prettiest apartment rooms on Pinterest share one secret: nothing that costs a deposit. This set of two jute-rope wood shelves sticks up with adhesive hooks, comes wrapped in faux ivy and warm micro-LEDs, and glows golden after dark. Over 750 reviewers rate them 4.5 stars. Plants, candles, tiny treasures — up on the wall in ten minutes, out without a trace.
+**No-drill hanging shelves with fairy lights.** The prettiest apartment rooms on Pinterest share one secret: nothing that costs a deposit. This set of two jute-rope wood shelves sticks up with adhesive hooks, comes wrapped in faux ivy and warm micro-LEDs, and glows golden after dark. Plants, candles, tiny treasures — up on the wall in ten minutes, out without a trace.
 
 ## 4. Dorm bedding that doesn't scream freshman
 
-**A plaid Twin XL bed-in-a-bag.** Dorm bedding ideas are up 400% as back-to-school planning ramps, and this five-piece set in blue-grey and cream farmhouse plaid is the grown-up answer — more cabin weekend than campus special. Rated 4.6 stars by 600+ students and parents for the lightweight-but-warm fill and true Twin XL fit. One bag, whole bed, chic dorm room unlocked.
+**A plaid Twin XL bed-in-a-bag.** Dorm bedding ideas are up 400% as back-to-school planning ramps, and this five-piece set in blue-grey and cream farmhouse plaid is the grown-up answer — more cabin weekend than campus special. One bag, whole bed, chic dorm room unlocked.
 
 ## 5. The kitchen counter, designed
 
-**A vintage black-and-bronze utensil crock.** 3D kitchen design boards all nail the same detail: one sculptural anchor on an otherwise calm counter. This 7.6-inch ceramic crock — a pitcher silhouette in matte black brushed with bronze — is that anchor in real life, and it swallows every wooden spoon you own. Rated 4.8 stars, and with fall kitchen decor already up 500% this month, it's the piece to build autumn around.
+**A vintage black-and-bronze utensil crock.** 3D kitchen design boards all nail the same detail: one sculptural anchor on an otherwise calm counter. This 7.6-inch ceramic crock — a pitcher silhouette in matte black brushed with bronze — is that anchor in real life, and it swallows every wooden spoon you own. And with fall kitchen decor already up 500% this month, it's the piece to build autumn around.
 
 ---
 

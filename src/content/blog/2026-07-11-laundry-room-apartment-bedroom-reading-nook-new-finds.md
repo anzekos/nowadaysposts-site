@@ -29,7 +29,7 @@ So we went back in for round two: five completely different pieces for the same 
 
 ## The payoff for the navy accent wall
 
-**An astronaut galaxy projector.** Boys' bedroom paint ideas are trending because a two-tone navy wall transforms the room for the price of a paint can. This little astronaut is what makes it magic: he stands on a moon-crater base and drifts a whole nebula across the ceiling, Bluetooth speaker included. A 4.6-star bedtime upgrade parents say kids actually ask to go to bed for.
+**An astronaut galaxy projector.** Boys' bedroom paint ideas are trending because a two-tone navy wall transforms the room for the price of a paint can. This little astronaut is what makes it magic: he stands on a moon-crater base and drifts a whole nebula across the ceiling, Bluetooth speaker included.
 
 ## A reading nook with zero carpentry
 

@@ -5,7 +5,7 @@ export const SITE = {
   // Privzeti meta description. Tagline je prekratek: Google reze pri ~160
   // znakih, pod ~70 pa si sam napise izvlecek iz strani.
   description:
-    'The home decor pieces trending on Pinterest right now, hand-picked daily and filtered to a 4.5 star rating or better on Amazon. New finds most days, no fluff.',
+    'The home decor pieces trending on Pinterest right now, hand-picked daily from thousands of Amazon bestsellers. New finds most days, no fluff.',
   // javni URL strani (Cloudflare Pages). Ob menjavi domene zamenjaj tu:
   url: 'https://nowadaysposts.pages.dev',
   // Google Analytics 4 Measurement ID (oblika 'G-XXXXXXXXXX'). Pusti prazno = GA izklopljen.

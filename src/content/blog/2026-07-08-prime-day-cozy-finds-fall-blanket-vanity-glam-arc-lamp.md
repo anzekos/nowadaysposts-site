@@ -17,7 +17,7 @@ So this roundup is deliberately built from **best-loved finds** — pieces with 
 
 ## Buy the fall blanket in July
 
-**A dual-sided sherpa weighted blanket.** Every fall bedroom pin starts with something heavy and touchable at the foot of the bed. This one is grey quilted flannel on one side, deep teddy sherpa on the other, with 15 lbs of even, calming weight in between — and over 6,000 reviewers calling it the coziest thing they own. It sells through every autumn; on Prime Day you get ahead of both the season and the price.
+**A dual-sided sherpa weighted blanket.** Every fall bedroom pin starts with something heavy and touchable at the foot of the bed. It sells through every autumn; on Prime Day you get ahead of both the season and the price.
 
 ## The small-space fix with a cult following
 
@@ -25,7 +25,7 @@ So this roundup is deliberately built from **best-loved finds** — pieces with 
 
 ## Cute vanity, solved by lighting
 
-**An LED halo vanity mirror.** The "cute vanity" trend keeps climbing because it's achievable — a desk becomes a dressing table the moment the lighting is right. This rounded mirror wraps a crisp halo of LED light behind a slim white frame, dims by touch, swaps between three color modes and needs zero installation. Nearly 3,000 reviewers made the swap before you.
+**An LED halo vanity mirror.** The "cute vanity" trend keeps climbing because it's achievable — a desk becomes a dressing table the moment the lighting is right. This rounded mirror wraps a crisp halo of LED light behind a slim white frame, dims by touch, swaps between three color modes and needs zero installation.
 
 ## The five-second entryway upgrade
 

@@ -17,11 +17,11 @@ The through-line is unmistakable: people are finishing the *forgotten* spaces. S
 
 ## The 900% trend: laundry room designs
 
-**Labeled clear storage drawers.** The organized-laundry-room look that's flooding the feeds comes down to one move: decant everything. This 4-pack of clear stackable drawers with crisp labels gives pods, dryer sheets and scent boosters each a labeled home, so the shelf above the washer reads styled instead of stuffed. Nearly 400 reviews and a 4.8 rating say the drawers hold up to daily raids — and refill day takes seconds.
+**Labeled clear storage drawers.** The organized-laundry-room look that's flooding the feeds comes down to one move: decant everything. This 4-pack of clear stackable drawers with crisp labels gives pods, dryer sheets and scent boosters each a labeled home, so the shelf above the washer reads styled instead of stuffed.
 
 ## The 800% trend: apartment bedroom decor
 
-**Vintage ballerina framed art.** Rental walls are the hardest part of an apartment bedroom — you can't paint them and you hesitate to fill them. This framed vintage print of ballerinas among summer roses is the one-nail fix: soft cottage palette, ready to hang, and that collected-over-years feeling the apartment bedroom trend is really about. Over 400 reviews of people doing exactly that.
+**Vintage ballerina framed art.** Rental walls are the hardest part of an apartment bedroom — you can't paint them and you hesitate to fill them. This framed vintage print of ballerinas among summer roses is the one-nail fix: soft cottage palette, ready to hang, and that collected-over-years feeling the apartment bedroom trend is really about.
 
 ## Bathroom inspiration, the earth-tone way
 
@@ -29,7 +29,7 @@ The through-line is unmistakable: people are finishing the *forgotten* spaces. S
 
 ## Boys' bedroom paint ideas need a finishing touch
 
-**Wooden dinosaur wall decor.** Half the pins in this trend are paint swatches — sage green, navy, warm clay. This is the piece that goes up when the paint dries: natural-wood dinosaur art that pops against every one of those trending colors and grows with the room from toddler to big kid. A 4.8 rating across nearly 700 reviews makes it the safest bet on this list.
+**Wooden dinosaur wall decor.** Half the pins in this trend are paint swatches — sage green, navy, warm clay. This is the piece that goes up when the paint dries: natural-wood dinosaur art that pops against every one of those trending colors and grows with the room from toddler to big kid.
 
 ## Window reading nooks, finally within reach
 

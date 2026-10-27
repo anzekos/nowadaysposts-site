@@ -35,7 +35,7 @@ except Exception:
     pass
 
 from dotenv import load_dotenv                          # noqa: E402
-from publish import build_affiliate_link                # noqa: E402
+from publish import build_affiliate_link, strip_ratings  # noqa: E402
 from gen_image import (                                 # noqa: E402
     fetch_product_image, trim_white, lerp, BG_TOP, BG_BOTTOM, CARD,
 )
@@ -165,7 +165,8 @@ def main():
             "asin": asin,
             "slug": slug,
             "title": w.get("title", ""),
-            "description": w.get("description", ""),
+            # brez Amazonovih ocen na strani (Associates §2(t), od 2026-10-27)
+            "description": strip_ratings(w.get("description", "")),
             "category": cat,
             "categorySlug": slugify(cat),
             "rating": meta.get("rating"),

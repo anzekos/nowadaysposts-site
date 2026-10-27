@@ -17,23 +17,23 @@ Pinterest people plan 30 to 45 days ahead, which means the boards being built to
 
 ## 1. The two-minute fall living room
 
-**Plush pumpkin pillow covers, set of two.** The fastest way into the 600% trend isn't repainting anything — it's swapping two pillow covers. These cream faux-fur cases are covered in fluffy raised pumpkins with tiny embroidered stems, and they layer perfectly with the knit throw you already own. Rated 4.7 stars by over 600 shoppers whose reviews repeat one line: they look far more expensive than they are.
+**Plush pumpkin pillow covers, set of two.** The fastest way into the 600% trend isn't repainting anything — it's swapping two pillow covers. These cream faux-fur cases are covered in fluffy raised pumpkins with tiny embroidered stems, and they layer perfectly with the knit throw you already own.
 
 ## 2. The counter corner that becomes a cafe
 
-**A black wood coffee bar organizer.** Coffee station ideas keep climbing (+80% year over year), and this is the one-move version: adjustable dividers that swallow the pods, syrup bottles, stirrers and sugar packets currently scattered across your counter. Park it next to the coffee maker, add a mug and a mini pumpkin, and the messiest square foot of the kitchen becomes the prettiest. 4.6 stars from reviewers who say guests now assume they have their life together.
+**A black wood coffee bar organizer.** Coffee station ideas keep climbing (+80% year over year), and this is the one-move version: adjustable dividers that swallow the pods, syrup bottles, stirrers and sugar packets currently scattered across your counter. Park it next to the coffee maker, add a mug and a mini pumpkin, and the messiest square foot of the kitchen becomes the prettiest.
 
 ## 3. The porch that lights itself
 
-**A set of two black farmhouse lanterns with timer candles.** Fall porch pins share one common denominator: warm glow at dusk. These open-frame metal lanterns hold flameless candles on a 6-hour timer — they switch on by themselves every evening and shrug off wind and rain that would kill a real flame. Nearly 900 reviewers rate them 4.6 stars. Cluster them with pumpkins and a pot of mums and your porch does the cozy part unattended.
+**A set of two black farmhouse lanterns with timer candles.** Fall porch pins share one common denominator: warm glow at dusk. These open-frame metal lanterns hold flameless candles on a 6-hour timer — they switch on by themselves every evening and shrug off wind and rain that would kill a real flame. Cluster them with pumpkins and a pot of mums and your porch does the cozy part unattended.
 
 ## 4. The dorm problem nobody warns you about
 
-**A stick-on bedside shelf.** Lofted bed, no nightstand, phone on the floor — the most relatable dorm complaint there is. This renter-safe organizer sticks straight to the wall with no drilling: a cup holder for the tumbler, a ledge for the phone, a bin for glasses and remotes, and a fold-down hook for headphones. Rated 4.6 stars by 670+ students and parents. Everything you reach for at midnight, floating exactly where your hand lands.
+**A stick-on bedside shelf.** Lofted bed, no nightstand, phone on the floor — the most relatable dorm complaint there is. This renter-safe organizer sticks straight to the wall with no drilling: a cup holder for the tumbler, a ledge for the phone, a bin for glasses and remotes, and a fold-down hook for headphones. Everything you reach for at midnight, floating exactly where your hand lands.
 
 ## 5. The desk that earns the "classy cubicle" tag
 
-**A 38.6-inch desk hutch with grid panels.** Desk hutch decor is up 300% because it fixes the real problem with small desks: everything lives on one flat plane. This one bridges a full-width shelf over your monitor, hangs two grid panels for clipped photos and notes, and stacks a four-tier tower down the right side. No drilling — it just sits on top. 4.6 stars from 320+ students and work-from-homers who suddenly have vertical space to style.
+**A 38.6-inch desk hutch with grid panels.** Desk hutch decor is up 300% because it fixes the real problem with small desks: everything lives on one flat plane. This one bridges a full-width shelf over your monitor, hangs two grid panels for clipped photos and notes, and stacks a four-tier tower down the right side. No drilling — it just sits on top.
 
 ---
 

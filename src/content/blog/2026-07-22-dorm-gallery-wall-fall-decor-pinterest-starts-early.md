@@ -18,7 +18,7 @@ Today's two finds are built for exactly these two waves.
 
 ## Fall starts on the sofa
 
-**Plaid boucle pillow covers, set of two.** You don't need to redecorate to catch the fall wave that's already building — you need one texture swap. These 18x18 covers mix burnt orange, rust, camel and cream checks in a thick nubby boucle that reads instantly like sweater weather. Rated 4.8 stars, they slide over the pillows you already own, layer perfectly with a chunky knit throw, and cost less than a single pumpkin-spice grocery run. When the +500% crowd starts styling fall living rooms in August, this sofa is already there.
+**Plaid boucle pillow covers, set of two.** You don't need to redecorate to catch the fall wave that's already building — you need one texture swap. These 18x18 covers mix burnt orange, rust, camel and cream checks in a thick nubby boucle that reads instantly like sweater weather. They slide over the pillows you already own, layer perfectly with a chunky knit throw, and cost less than a single pumpkin-spice grocery run. When the +500% crowd starts styling fall living rooms in August, this sofa is already there.
 
 ---
 

@@ -26,7 +26,7 @@ ship in time.
 
 If Dad's happy place is the bar cart, start with the showstopper. The **gun-shaped whiskey
 decanter set** — with matching shot glasses — is the bold, conversation-starting centerpiece for
-a home bar or man cave, and it pours like a proper decanter too (4.8 stars from 700+ home bars).
+a home bar or man cave, and it pours like a proper decanter too.
 Layer in the **handcrafted whiskey-barrel coaster set** for rustic lodge warmth that protects the
 wood and looks the part, then hang the **billiard-ball bottle opener** — wall-mounted, with a cap
 catcher — for the pool-playing dad who never wants to lose a cap to the floor again. Three gifts,
@@ -48,7 +48,7 @@ stem into a styled, minimalist centerpiece for a shelf or nightstand. For a touc
 polish, the **Kate Spade 'Make It Pop' vase** in cobalt blue lends a bookshelf or entry table that
 quiet-luxury feel — a small splurge that reads far more expensive than it is. And the **set of four
 glass bud vases** is the timeless basic you reach for again and again: line them up with single
-stems for that effortless, magazine-table look. 870+ reviewers agree.
+stems for that effortless, magazine-table look.
 
 Gift the dad, set the table, then let the vases carry the room the rest of the year. That's the
 whole edit.

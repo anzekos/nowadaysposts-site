@@ -17,23 +17,23 @@ Pinterest people plan 30 to 45 days ahead, so what's being saved today is what r
 
 ## 1. The dining room wall, solved with rope
 
-**A set of six woven jute wall baskets.** The look leading the dining-room explosion isn't a gallery wall of frames — it's texture. These extra-large jute discs (up to 23 inches) cluster above a table or sideboard like giant organic sunbursts: instant depth, no color commitment, one nail each. Rated 4.8 stars by 600 shoppers who call it the fastest "designer wall" they've ever hung.
+**A set of six woven jute wall baskets.** The look leading the dining-room explosion isn't a gallery wall of frames — it's texture. These extra-large jute discs (up to 23 inches) cluster above a table or sideboard like giant organic sunbursts: instant depth, no color commitment, one nail each.
 
 ## 2. Halloween, but make it renter-friendly
 
-**A matte-black bat shelf with key hooks.** The secret behind the early Halloween surge is that apartment dwellers aren't buying decorations — they're buying one dramatic piece that earns its wall all year. This 15.5-inch bat silhouette floats a ledge for candles and crystals on top and quietly becomes the keys-and-lanyard station below. 4.8 stars from 540+ goth-cute believers. Spooky season starts when you say it does.
+**A matte-black bat shelf with key hooks.** The secret behind the early Halloween surge is that apartment dwellers aren't buying decorations — they're buying one dramatic piece that earns its wall all year. This 15.5-inch bat silhouette floats a ledge for candles and crystals on top and quietly becomes the keys-and-lanyard station below. Spooky season starts when you say it does.
 
 ## 3. The kitchen that turns October overnight
 
-**A two-piece "hello pumpkin" mat set.** Fall kitchen decor's 600% jump starts at floor level: a burnt-orange mat by the sink, a pumpkin-scattered runner along the counter, non-slip backing under both. The woven farmhouse texture hides real life between washes — 4.7 stars from 450+ shoppers who report it surviving kids, dogs and spilled coffee. Two mats down, and the whole room reads autumn.
+**A two-piece "hello pumpkin" mat set.** Fall kitchen decor's 600% jump starts at floor level: a burnt-orange mat by the sink, a pumpkin-scattered runner along the counter, non-slip backing under both. The woven farmhouse texture hides real life between washes. Two mats down, and the whole room reads autumn.
 
 ## 4. The shelf-styling cheat code
 
-**A four-piece neutral ceramic vase set.** "Modern cozy living room" is the week's fastest riser, and stylists keep reaching for the same shortcut: vases in different heights, one warm palette — espresso, tan, cream, terracotta — lined up with dried stems in exactly one of them. Rated 4.8 stars by 330+ shoppers who say it looks like a boutique haul, not one click. The easiest five minutes of decorating you'll do this year.
+**A four-piece neutral ceramic vase set.** "Modern cozy living room" is the week's fastest riser, and stylists keep reaching for the same shortcut: vases in different heights, one warm palette — espresso, tan, cream, terracotta — lined up with dried stems in exactly one of them. Not one click. The easiest five minutes of decorating you'll do this year.
 
 ## 5. The centerpiece of the chic dorm vanity
 
-**A rotating gold jewelry stand.** Chic dorm pins are up 200% year over year, and their gravitational center is the vanity corner. This stand replaces a whole drawer with none of the digging: a spinning earring panel, a tangle-free necklace rail up top, bracelet pegs on the side and a velvet ring tray at the base. No assembly, 4.8 stars from 430+ shoppers. The messy jewelry pile becomes the prettiest thing on the desk.
+**A rotating gold jewelry stand.** Chic dorm pins are up 200% year over year, and their gravitational center is the vanity corner. This stand replaces a whole drawer with none of the digging: a spinning earring panel, a tangle-free necklace rail up top, bracelet pegs on the side and a velvet ring tray at the base. No assembly. The messy jewelry pile becomes the prettiest thing on the desk.
 
 ---
 

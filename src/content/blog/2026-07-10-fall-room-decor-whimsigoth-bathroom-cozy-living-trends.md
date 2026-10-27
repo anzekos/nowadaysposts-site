@@ -25,7 +25,7 @@ So today's roundup is one well-reviewed hero piece per trend — each one photog
 
 ## Entryway table decor that styles itself
 
-**A donut vase trio in sage, terracotta and cream.** Entryway table decor jumped 30% this week, and this sculptural set of three is the shortcut: graduated sizes that look curated the moment you cluster them on a console. Nearly a 4.9-star average from over 500 homes — styled empty or with a few dried stems.
+**A donut vase trio in sage, terracotta and cream.** Entryway table decor jumped 30% this week, and this sculptural set of three is the shortcut: graduated sizes that look curated the moment you cluster them on a console.
 
 ## The cozy living room, one throw later
 
@@ -33,7 +33,7 @@ So today's roundup is one well-reviewed hero piece per trend — each one photog
 
 ## Rented walls, styled anyway
 
-**36-inch rustic floating shelves.** Apartment living room ideas keep climbing because renters want storage that looks like decor. This dark-wood pair mounts on hidden brackets, holds real weight, and turns one blank wall into a styled shelfscape of plants, frames and favorite books — 4.8 stars from small-space dwellers who got their floors back.
+**36-inch rustic floating shelves.** Apartment living room ideas keep climbing because renters want storage that looks like decor. This dark-wood pair mounts on hidden brackets, holds real weight, and turns one blank wall into a styled shelfscape of plants, frames and favorite books.
 
 ---
 

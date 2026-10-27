@@ -34,7 +34,7 @@ stores flat for next summer — festive without the kitsch.
 
 Here's where the season's most underrated upgrade lives. The **dark-green washable entry rug**
 brings moody, color-drenched depth to a front door or kitchen and tosses straight in the wash when
-life happens (4.4 stars, nearly 2,000 entryways). Going bigger? The **vintage 8x10 washable area
+life happens. Going bigger? The **vintage 8x10 washable area
 rug** grounds a living room with old-world, heirloom-looking warmth — and the whole thing is
 machine-washable and foldable, so spills and muddy paws stop being a crisis. 8,000+ rooms agree.
 
