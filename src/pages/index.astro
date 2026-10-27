@@ -2,174 +2,157 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
+import ProductRail from '../components/ProductRail.astro';
 import Newsletter from '../components/Newsletter.astro';
-import products from '../data/products.json';
+import Icon from '../components/Icon.astro';
 import { SITE } from '../site.config.mjs';
+import { products, byNewest, photoFor, categories as getCategories, seasonalShelf } from '../lib/catalog.js';
 
-// kategorije + števec + naslovna slika (najbolje ocenjen produkt kategorije)
-const catMap = new Map();
-for (const p of products) {
-  const c = catMap.get(p.categorySlug) ?? {
-    slug: p.categorySlug,
-    name: p.category,
-    count: 0,
-    image: p.image,
-    bestRating: -1,
-  };
-  c.count++;
-  if ((p.rating ?? 0) > c.bestRating) {
-    c.bestRating = p.rating ?? 0;
-    c.image = p.image;
-  }
-  catMap.set(p.categorySlug, c);
-}
-const categories = [...catMap.values()].sort((a, b) => b.count - a.count);
+const sorted = [...products].sort(byNewest);
+// Prvi zaslon: najnovejši izdelki. 8 = 4x2 na telefonu in 2x4 na namizju; 9. se pokaže
+// samo pri treh stolpcih (sm), da zadnja vrsta ni prazna.
+const fresh = sorted.slice(0, 9);
+const freshSet = new Set(fresh.map((p) => p.asin));
 
-// "Trending now" = najnovejših 12 (po addedAt)
-const trending = [...products]
-  .sort((a, b) => String(b.addedAt ?? '').localeCompare(String(a.addedAt ?? '')))
-  .slice(0, 12);
+// Sezonska polica brez izdelkov, ki so že zgoraj.
+const season = seasonalShelf({ exclude: freshSet });
+const shelf = season ? season.items : [];
 
-// zadnji blog post (teaser)
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const categories = getCategories();
+
+// Hero mozaik: tri najnovejše scene (iste slike kot na Pinterestu).
+const heroScenes = sorted.map((p) => ({ p, ph: photoFor(p) })).filter((x) => x.ph.kind === 'scene').slice(0, 3);
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const latest = posts[0];
-const fmt = (d) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const latestScene = latest
+  ? (latest.data.asins ?? []).map((a) => products.find((p) => p.asin === a)).filter(Boolean)
+      .map(photoFor).find((ph) => ph.kind === 'scene')
+  : null;
+const fmt = (d) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
 ---
 
-<Layout>
-  <!-- HERO -->
-  <section class="relative overflow-hidden bg-gradient-to-b from-cream to-beige/60">
-    <div class="mx-auto max-w-content px-4 pb-14 pt-16 text-center sm:pb-16 sm:pt-20">
-      <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-terracotta">
-        Handpicked home decor, daily
-      </p>
-      <h1 class="mx-auto max-w-3xl font-serif text-4xl font-bold leading-tight text-ink sm:text-5xl">
+<Layout image={heroScenes[0]?.p.image}>
+  <!-- HERO: kratek, da je prva vrsta izdelkov vidna na telefonu brez dolgega drsenja -->
+  <section class="mx-auto grid max-w-content items-center gap-8 px-4 pb-8 pt-8 sm:pt-12 lg:grid-cols-[1.45fr_1fr] lg:gap-12 lg:pb-14 lg:pt-12">
+    <div>
+      <h1 class="font-serif text-[2.35rem] font-semibold leading-[1.08] tracking-[-0.01em] text-ink sm:text-5xl sm:leading-[1.08] lg:text-[2.75rem]">
         The trending pieces that make a room look designed.
       </h1>
-      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">
-        Mirrors, florals, rugs and cozy finds we'd actually put in our own home —
-        curated fresh every day from thousands of Amazon bestsellers.
+      <p class="mt-4 max-w-md text-base leading-relaxed text-muted sm:text-lg">
+        Cozy finds we'd put in our own home, picked fresh every day from thousands of Amazon bestsellers.
       </p>
-      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a
-          href="#trending"
-          class="inline-flex w-full items-center justify-center rounded-full bg-terracotta px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:bg-terracotta-dark sm:w-auto"
-        >
-          Shop the trending edit ↓
+      <div class="mt-6 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
+        <a href="/shop" class="btn-primary px-4 sm:px-6">
+          Shop all {products.length} finds
         </a>
-        <a
-          href="#categories"
-          class="inline-flex w-full items-center justify-center rounded-full border border-ink/15 bg-white/70 px-7 py-3.5 text-sm font-semibold text-ink transition hover:border-terracotta hover:text-terracotta sm:w-auto"
-        >
-          Browse by category
-        </a>
+        {latest && (
+          <a href={`/blog/${latest.slug}`} class="btn-secondary px-4 sm:px-6">Read today's edit</a>
+        )}
       </div>
-      <!-- trust vrstica (brez Amazonovih ocen: Associates §2(t), od 2026-10-27) -->
-      <div class="mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted">
-        <span class="inline-flex items-center gap-1.5">
-          <svg class="h-4 w-4 text-terracotta" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" /></svg>
-          New finds most days
-        </span>
-        <span class="inline-flex items-center gap-1.5">
-          <svg class="h-4 w-4 text-terracotta" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" /></svg>
-          {products.length}+ curated finds
-        </span>
-      </div>
-      <p class="mt-5 text-xs text-muted">{SITE.disclosureShort}</p>
     </div>
+
+    {heroScenes.length === 3 && (
+      <div class="hidden aspect-[6/5] grid-cols-[1.25fr_1fr] grid-rows-2 gap-3 lg:grid" aria-hidden="true">
+        {heroScenes.map(({ ph }, i) => (
+          <img
+            src={ph.src}
+            alt=""
+            width={ph.w}
+            height={ph.h}
+            loading="eager"
+            fetchpriority={i === 0 ? 'high' : 'auto'}
+            class:list={['h-full w-full rounded-xl object-cover', i === 0 && 'row-span-2']}
+          />
+        ))}
+      </div>
+    )}
   </section>
 
-  <!-- KATEGORIJE (vizualne kartice) -->
-  <section id="categories" class="mx-auto max-w-content scroll-mt-20 px-4 py-14">
-    <div class="mb-8 flex items-end justify-between gap-4">
-      <div>
-        <h2 class="font-serif text-3xl font-bold text-ink">Shop by category</h2>
-        <p class="mt-2 text-muted">Find the exact look you're going for.</p>
-      </div>
-      <a href="/shop" class="hidden shrink-0 text-sm font-semibold text-terracotta transition hover:text-terracotta-dark sm:block">
-        Shop all →
+  <!-- NOVO TA TEDEN -->
+  <section id="trending" class="mx-auto max-w-content scroll-mt-20 px-4 pb-14 sm:pb-20" aria-labelledby="new-title">
+    <div class="mb-5 border-t border-line pt-6">
+      <h2 id="new-title" class="font-serif text-2xl font-semibold text-ink sm:text-3xl">New this week</h2>
+      <p class="mt-1 text-xs text-muted">{SITE.disclosureShort}</p>
+    </div>
+    <ul class="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-4">
+      {fresh.map((p, i) => (
+        <li class:list={[i === 8 && 'hidden sm:block lg:hidden']}>
+          <ProductCard product={p} eager={i < 4} />
+        </li>
+      ))}
+    </ul>
+    <div class="mt-8 flex justify-center">
+      <a href="/shop" class="btn-secondary px-6">
+        Shop all {products.length} finds <Icon name="arrow-right" />
       </a>
     </div>
-    <div class="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
-      {categories.map((c) => (
-        <a
-          href={`/${c.slug}`}
-          class="group relative block overflow-hidden rounded-2xl shadow-soft ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-lift"
-        >
-          <img
-            src={c.image}
-            alt={c.name}
-            width="400"
-            height="400"
-            loading="lazy"
-            class="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.05]"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-4">
-            <p class="font-serif text-lg font-semibold text-white">{c.name}</p>
-            <p class="text-xs text-white/75">{c.count} {c.count === 1 ? 'find' : 'finds'} →</p>
-          </div>
-        </a>
+  </section>
+
+  <!-- SEZONSKA POLICA -->
+  {season && shelf.length >= 5 && (
+    <section class="bg-surface py-14 sm:py-20" aria-labelledby="season-title">
+      <div class="mx-auto max-w-content px-4">
+        <h2 id="season-title" class="font-serif text-2xl font-semibold text-ink sm:text-3xl">{season.title}</h2>
+        <p class="mb-5 mt-1 max-w-xl text-sm text-muted">
+          Pinterest plans the season early, so we do too. Our newest seasonal finds in one row.
+        </p>
+        <ProductRail items={shelf} label={season.title} />
+      </div>
+    </section>
+  )}
+
+  <!-- KATEGORIJE: čipi s sličico, ne devet velikih ploščic -->
+  <section id="categories" class="mx-auto max-w-content px-4 py-14 sm:py-20" aria-labelledby="cat-title">
+    <h2 id="cat-title" class="font-serif text-2xl font-semibold text-ink sm:text-3xl">Shop by room and piece</h2>
+    <ul class="mt-6 grid grid-cols-2 gap-2.5 lg:grid-cols-3">
+      {categories.map((c, i) => (
+        <li class:list={[i === 0 && categories.length % 2 === 1 && 'col-span-2 lg:col-span-1']}>
+          <a href={`/${c.slug}`} class="group flex items-center gap-2.5 rounded-xl bg-surface p-1.5 pr-3 ring-1 ring-line transition-shadow duration-ui ease-out hover:shadow-lift sm:gap-3 sm:p-2 sm:pr-4">
+            <img
+              src={c.photo.src}
+              alt=""
+              width={c.photo.w}
+              height={c.photo.h}
+              loading="lazy"
+              class:list={['h-12 w-12 shrink-0 rounded-lg bg-surface sm:h-14 sm:w-14', c.photo.kind === 'scene' ? 'object-cover' : 'object-contain p-1']}
+            />
+            <span class="min-w-0 flex-1">
+              <span class="block truncate text-sm font-semibold text-ink sm:text-base">{c.name}</span>
+              <span class="block text-xs text-muted sm:text-sm">{c.count} {c.count === 1 ? 'find' : 'finds'}</span>
+            </span>
+            <Icon name="arrow-right" class="hidden h-4 w-4 text-muted transition-transform duration-ui ease-out group-hover:translate-x-0.5 sm:block" />
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
   </section>
 
-  <!-- TRENDING GRID -->
-  <section id="trending" class="scroll-mt-20 bg-white/50">
-    <div class="mx-auto max-w-content px-4 py-14">
-      <div class="mb-8 text-center">
-        <h2 class="font-serif text-3xl font-bold text-ink">Trending now</h2>
-        <p class="mt-2 text-muted">Our latest finds, fresh from the bestseller lists.</p>
-      </div>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {trending.map((p, i) => <ProductCard product={p} eager={i < 3} />)}
-      </div>
-      <div class="mt-10 text-center">
-        <a
-          href="/shop"
-          class="inline-flex items-center justify-center rounded-full bg-ink px-8 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:bg-terracotta"
-        >
-          Shop all {products.length} finds →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- LATEST BLOG TEASER -->
+  <!-- ZADNJI BLOG -->
   {latest && (
-    <section class="mx-auto max-w-content px-4 py-14">
-      <a
-        href={`/blog/${latest.slug}`}
-        class="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-soft ring-1 ring-black/5 transition duration-300 hover:shadow-lift md:flex-row"
-      >
-        {latest.data.cover && (
-          <img
-            src={latest.data.cover}
-            alt={latest.data.title}
-            width="640"
-            height="480"
-            loading="lazy"
-            class="aspect-[4/3] w-full object-cover md:w-2/5"
-          />
-        )}
-        <div class="flex flex-1 flex-col justify-center p-6 sm:p-8">
-          <span class="text-xs font-semibold uppercase tracking-wide text-terracotta">
-            Latest from the blog · {fmt(latest.data.date)}
-          </span>
-          <h2 class="mt-2 font-serif text-2xl font-bold leading-snug text-ink group-hover:underline">
+    <section class="mx-auto max-w-content px-4" aria-labelledby="edit-title">
+      <a href={`/blog/${latest.slug}`} class="group grid overflow-hidden rounded-xl bg-surface ring-1 ring-line transition-shadow duration-ui ease-out hover:shadow-lift md:grid-cols-[1fr_1.15fr]">
+        <img
+          src={latestScene?.src ?? latest.data.cover}
+          alt=""
+          width={latestScene?.w ?? 1080}
+          height={latestScene?.h ?? 1080}
+          loading="lazy"
+          class="aspect-[4/3] h-full w-full object-cover md:aspect-auto"
+        />
+        <div class="flex flex-col justify-center p-6 sm:p-10">
+          <p class="text-sm font-medium text-muted">Today's edit, {fmt(latest.data.date)}</p>
+          <h2 id="edit-title" class="mt-2 font-serif text-2xl font-semibold leading-snug text-ink group-hover:underline sm:text-3xl">
             {latest.data.title}
           </h2>
-          <p class="mt-2 text-muted">{latest.data.description}</p>
-          <span class="mt-4 text-sm font-semibold text-terracotta transition group-hover:text-terracotta-dark">
-            Read the edit →
+          <p class="mt-3 line-clamp-3 leading-relaxed text-muted">{latest.data.description}</p>
+          <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-terracotta">
+            Read today's edit <Icon name="arrow-right" />
           </span>
         </div>
       </a>
     </section>
   )}
 
-  <!-- NEWSLETTER -->
   <Newsletter />
 </Layout>

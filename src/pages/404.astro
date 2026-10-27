@@ -9,26 +9,20 @@
 */
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../site.config.mjs';
-import products from '../data/products.json';
+import { categories as getCategories } from '../lib/catalog.js';
 
 // nekaj priljubljenih kategorij kot pot naprej, ne slepa ulica
-const catMap = new Map();
-for (const p of products) {
-  const c = catMap.get(p.categorySlug) ?? { slug: p.categorySlug, name: p.category, count: 0 };
-  c.count++;
-  catMap.set(p.categorySlug, c);
-}
-const categories = [...catMap.values()].sort((a, b) => b.count - a.count).slice(0, 6);
+const categories = getCategories().slice(0, 6);
 ---
 
 <Layout
-  title={`Page not found — ${SITE.name}`}
+  title={`Page not found | ${SITE.name}`}
   description="That page has moved or never existed. Here is the way back."
   noindex
 >
   <section class="mx-auto flex min-h-[60vh] max-w-2xl flex-col justify-center px-4 py-20">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta">Error 404</p>
-    <h1 class="mt-4 font-serif text-4xl font-bold leading-tight text-ink sm:text-5xl">
+    <p class="text-sm font-semibold text-terracotta">Error 404</p>
+    <h1 class="mt-3 font-serif text-4xl font-semibold leading-tight text-ink sm:text-5xl">
       This one is out of stock.
     </h1>
     <p class="mt-5 max-w-lg leading-relaxed text-muted">
@@ -36,33 +30,16 @@ const categories = [...catMap.values()].sort((a, b) => b.count - a.count).slice(
     </p>
 
     <div class="mt-8 flex flex-wrap gap-3">
-      <a
-        href="/"
-        class="inline-flex min-h-11 items-center rounded-full bg-terracotta px-6 py-3 text-sm font-semibold text-white transition hover:bg-terracotta-dark"
-      >
-        Back to the home page
-      </a>
-      <a
-        href="/shop"
-        class="inline-flex min-h-11 items-center rounded-full px-6 py-3 text-sm font-semibold text-ink ring-1 ring-black/15 transition hover:bg-beige/50"
-      >
-        Browse all finds
-      </a>
+      <a href="/" class="btn-primary px-6">Back to the home page</a>
+      <a href="/shop" class="btn-secondary px-6">Browse all finds</a>
     </div>
 
     {categories.length > 0 && (
-      <div class="mt-12 border-t border-black/5 pt-8">
-        <p class="text-xs font-semibold uppercase tracking-[0.15em] text-ink">Popular categories</p>
+      <div class="mt-12 border-t border-line pt-8">
+        <p class="text-sm font-semibold text-ink">Popular categories</p>
         <ul class="mt-4 flex flex-wrap gap-2">
           {categories.map((c) => (
-            <li>
-              <a
-                href={`/${c.slug}`}
-                class="inline-flex min-h-11 items-center rounded-full bg-white px-4 py-2 text-sm text-muted ring-1 ring-black/5 transition hover:text-ink"
-              >
-                {c.name}
-              </a>
-            </li>
+            <li><a href={`/${c.slug}`} class="chip">{c.name}</a></li>
           ))}
         </ul>
       </div>

@@ -1,121 +1,89 @@
 ---
 import { SITE } from '../site.config.mjs';
-import products from '../data/products.json';
+import Icon from './Icon.astro';
+import { products, categories as getCategories } from '../lib/catalog.js';
 
-// kategorije zgradimo iz produktov (po številu produktov, največje najprej)
-const catMap = new Map();
-for (const p of products) {
-  const c = catMap.get(p.categorySlug) ?? { slug: p.categorySlug, name: p.category, count: 0 };
-  c.count++;
-  catMap.set(p.categorySlug, c);
-}
-const categories = [...catMap.values()].sort((a, b) => b.count - a.count);
+const categories = getCategories();
+const path = Astro.url.pathname;
+const isActive = (href) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
-<header class="sticky top-0 z-40 border-b border-black/5 bg-cream/90 backdrop-blur">
-  <div class="mx-auto flex max-w-content items-center justify-between gap-4 px-4 py-3.5">
-    <a href="/" class="font-serif text-xl font-bold tracking-tight text-ink">
-      {SITE.name}
-    </a>
+<!-- z-index: header 40, piškotna pasica 50, skip-link 60 -->
+<header class="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
+  <div class="mx-auto flex h-16 max-w-content items-center justify-between gap-4 px-4">
+    <a href="/" class="font-serif text-xl font-bold tracking-tight text-ink">{SITE.name}</a>
 
-    <!-- desktop nav: malo linkov, kategorije pod "Shop" dropdownom -->
-    <nav class="hidden items-center gap-7 text-sm font-medium text-muted md:flex">
-      <a href="/" class="transition hover:text-ink">Home</a>
+    <nav class="hidden items-center gap-1 text-sm font-medium md:flex" aria-label="Main">
+      <a href="/" class:list={['rounded-full px-3.5 py-2 transition-colors duration-ui', isActive('/') ? 'text-ink' : 'text-muted hover:text-ink']}>Home</a>
 
       <div class="group relative">
         <a
           href="/shop"
-          class="inline-flex items-center gap-1 py-3 transition hover:text-ink"
+          class:list={['inline-flex items-center gap-1 rounded-full px-3.5 py-2 transition-colors duration-ui', isActive('/shop') ? 'text-ink' : 'text-muted hover:text-ink']}
           aria-haspopup="true"
         >
           Shop
-          <svg class="h-3.5 w-3.5 transition group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06Z" clip-rule="evenodd" />
-          </svg>
+          <Icon name="caret-down" class="h-3.5 w-3.5 transition-transform duration-ui group-hover:rotate-180" />
         </a>
-        <!-- dropdown panel -->
-        <div class="invisible absolute left-1/2 top-full z-50 w-[26rem] -translate-x-1/2 pt-1 opacity-0 transition duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-          <div class="overflow-hidden rounded-2xl bg-white p-3 shadow-lift ring-1 ring-black/5">
-            <div class="grid grid-cols-2 gap-1">
+        {/* Poravnan na desni rob "Shop": centriran panel je pri 768 px segel čez rob in ustvaril vodoravni preliv. */}
+        <div class="invisible absolute right-0 top-full w-[28rem] pt-2 opacity-0 transition-opacity duration-ui ease-out group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+          <div class="rounded-xl bg-surface p-2 shadow-lift ring-1 ring-line">
+            <div class="grid grid-cols-2 gap-0.5">
               {categories.map((c) => (
-                <a
-                  href={`/${c.slug}`}
-                  class="flex items-baseline justify-between gap-2 rounded-xl px-3.5 py-2.5 text-ink transition hover:bg-cream"
-                >
-                  <span class="font-medium">{c.name}</span>
+                <a href={`/${c.slug}`} class="flex items-baseline justify-between gap-2 rounded-lg px-3 py-2.5 text-ink transition-colors duration-ui hover:bg-canvas">
+                  <span>{c.name}</span>
                   <span class="text-xs text-muted">{c.count}</span>
                 </a>
               ))}
             </div>
-            <a
-              href="/shop"
-              class="mt-2 flex items-center justify-center gap-1 rounded-xl bg-ink px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-terracotta"
-            >
-              Shop all {products.length} finds →
+            <a href="/shop" class="mt-1 flex items-center justify-between rounded-lg px-3 py-2.5 font-semibold text-terracotta transition-colors duration-ui hover:bg-terracotta-soft">
+              All {products.length} finds
+              <Icon name="arrow-right" />
             </a>
           </div>
         </div>
       </div>
 
-      <a href="/blog" class="transition hover:text-ink">Blog</a>
-      <a href="/about" class="transition hover:text-ink">About</a>
+      <a href="/blog" class:list={['rounded-full px-3.5 py-2 transition-colors duration-ui', isActive('/blog') ? 'text-ink' : 'text-muted hover:text-ink']}>Blog</a>
+      <a href="/about" class:list={['rounded-full px-3.5 py-2 transition-colors duration-ui', isActive('/about') ? 'text-ink' : 'text-muted hover:text-ink']}>About</a>
     </nav>
 
-    <!-- desktop CTA -->
-    <a
-      href="/shop"
-      class="hidden rounded-full bg-terracotta px-5 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-terracotta-dark md:inline-flex"
-    >
-      Shop bestsellers
-    </a>
-
-    <!-- mobile hamburger -->
     <button
       id="menu-toggle"
       type="button"
-      class="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink transition hover:bg-beige/60 md:hidden"
+      class="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-ink transition-colors duration-ui hover:bg-line/60 md:hidden"
       aria-label="Open menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
-      <svg id="menu-icon-open" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
-      </svg>
-      <svg id="menu-icon-close" class="hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-        <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
-      </svg>
+      <span id="menu-icon-open"><Icon name="list" class="h-6 w-6" /></span>
+      <span id="menu-icon-close" class="hidden"><Icon name="x" class="h-6 w-6" /></span>
     </button>
   </div>
 
-  <!-- mobile panel -->
-  <div id="mobile-menu" class="hidden border-t border-black/5 bg-cream md:hidden">
-    <div class="mx-auto max-w-content space-y-5 px-4 py-5">
-      <div>
-        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted">Shop by category</p>
-        <div class="grid grid-cols-2 gap-1.5">
-          {categories.map((c) => (
-            <a
-              href={`/${c.slug}`}
-              class="flex items-baseline justify-between gap-2 rounded-xl bg-white px-3.5 py-2.5 text-sm font-medium text-ink ring-1 ring-black/5"
-            >
+  <div id="mobile-menu" class="hidden border-t border-line bg-canvas md:hidden">
+    <nav class="mx-auto max-w-content px-4 pb-6 pt-4" aria-label="Mobile">
+      <ul class="grid grid-cols-3 gap-2 text-sm font-semibold">
+        <li><a href="/" class="flex min-h-11 items-center justify-center rounded-full bg-surface ring-1 ring-line">Home</a></li>
+        <li><a href="/blog" class="flex min-h-11 items-center justify-center rounded-full bg-surface ring-1 ring-line">Blog</a></li>
+        <li><a href="/about" class="flex min-h-11 items-center justify-center rounded-full bg-surface ring-1 ring-line">About</a></li>
+      </ul>
+      <p class="mb-2 mt-5 text-sm font-semibold text-ink">Shop by category</p>
+      <ul class="grid grid-cols-2 gap-2">
+        {categories.map((c) => (
+          <li>
+            <a href={`/${c.slug}`} class="flex min-h-11 items-center justify-between gap-2 rounded-xl bg-surface px-3.5 text-sm font-medium text-ink ring-1 ring-line">
               {c.name}
               <span class="text-xs text-muted">{c.count}</span>
             </a>
-          ))}
-        </div>
-      </div>
-      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-muted">
-        <a href="/" class="py-1">Home</a>
-        <a href="/blog" class="py-1">Blog</a>
-        <a href="/about" class="py-1">About</a>
-      </div>
-      <a
-        href="/shop"
-        class="flex items-center justify-center rounded-full bg-terracotta px-5 py-3 text-sm font-semibold text-white transition hover:bg-terracotta-dark"
-      >
-        Shop all {products.length} finds →
+          </li>
+        ))}
+      </ul>
+      <a href="/shop" class="btn-primary mt-4 w-full">
+        Shop all {products.length} finds
+        <Icon name="arrow-right" />
       </a>
-    </div>
+    </nav>
   </div>
 </header>
 

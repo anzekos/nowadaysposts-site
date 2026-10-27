@@ -1,0 +1,20 @@
+---
+/**
+ * Vodoravna tirnica izdelkov (scroll-snap) do lg; od lg naprej mreža s 5 stolpci.
+ * Na telefonu se vidita ~2,3 kartici, kar pove, da se da potegniti. Kličoči naj podajo
+ * 5 ali 10 izdelkov, da so vrste na namizju polne.
+ */
+import ProductCard from './ProductCard.astro';
+
+const { items = [], eager = false, label } = Astro.props;
+---
+
+<div class="-mx-4 px-4 lg:mx-0 lg:px-0" role="region" aria-label={label}>
+  <ul class="rail lg:grid lg:grid-cols-5 lg:gap-5 lg:overflow-visible">
+    {items.map((p, i) => (
+      <li class="w-[44%] shrink-0 sm:w-[30%] lg:w-auto">
+        <ProductCard product={p} eager={eager && i < 3} />
+      </li>
+    ))}
+  </ul>
+</div>

@@ -1,0 +1,45 @@
+---
+/**
+ * Mreža izdelkov s postopnim nalaganjem: prvih `initial` je vidnih, ostale razkrije
+ * "Show more" po `step`. Vse so v HTML-ju (SEO, brez JS se pokažejo vse).
+ */
+import ProductCard from './ProductCard.astro';
+
+const { items = [], initial = 24, step = 24 } = Astro.props;
+const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<ul id={id} class="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-4">
+  {items.map((p, i) => (
+    <li data-more={i >= initial ? '' : undefined} hidden={i >= initial}>
+      <ProductCard product={p} eager={i < 4} />
+    </li>
+  ))}
+</ul>
+
+{items.length > initial && (
+  <div class="mt-10 flex flex-col items-center gap-2">
+    <button type="button" class="btn-secondary px-8" data-show-more={id} data-step={step}>
+      Show more
+    </button>
+    <p class="text-xs text-muted" data-count={id}>Showing {initial} of {items.length}</p>
+  </div>
+)}
+
+<noscript><style>[data-more]{display:block!important}</style></noscript>
+
+<script>
+  document.querySelectorAll('[data-show-more]').forEach((btn) => {
+    const grid = document.getElementById(btn.dataset.showMore);
+    const count = document.querySelector(`[data-count="${btn.dataset.showMore}"]`);
+    const step = Number(btn.dataset.step) || 24;
+    btn.addEventListener('click', () => {
+      const hidden = grid.querySelectorAll('li[hidden]');
+      hidden.forEach((li, i) => { if (i < step) li.hidden = false; });
+      const total = grid.children.length;
+      const shown = total - grid.querySelectorAll('li[hidden]').length;
+      if (count) count.textContent = `Showing ${shown} of ${total}`;
+      if (shown >= total) btn.parentElement.remove();
+    });
+  });
+</script>

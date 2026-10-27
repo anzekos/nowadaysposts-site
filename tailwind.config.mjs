@@ -1,36 +1,49 @@
 import typography from '@tailwindcss/typography';
 
+/*
+  Tokeni iz DESIGN-LOCK.md (2026-10-27). Paleta je "terakota + skrilavec": hladna nevtralna
+  podlaga, da tople Flow scene izstopijo, in ena akcentna barva. Kontrasti (WCAG):
+  muted na canvas 5,8:1, terakota na canvas 5,2:1, bela na terakoti 5,5:1.
+*/
+const canvas = '#f5f6f7';
+const line = '#e2e5e9';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx,vue}'],
   theme: {
     extend: {
       colors: {
-        cream: '#f6f1e9',
-        beige: '#e8ded1',
-        ink: '#322f2b',
-        // Bilo #7a7167 = 3,97:1 na bezu. Pod WCAG AA (1.4.3) za navadno besedilo.
-        muted: '#6b625a',
-        // Bilo #be7456. Belo besedilo na njem je dalo 3,6:1, isti odtenek kot
-        // besedilo na belem prav tako 3,6:1. Ta odtenek zdrzi 4,5:1 v obe
-        // smeri in tudi na kremni ter bez podlagi.
+        canvas,
+        surface: '#fdfdfd',
+        line,
+        ink: '#1d232b',
+        muted: '#556170',
         terracotta: '#9c5438',
         'terracotta-dark': '#7f4229',
-        // Za akcentno besedilo NA temni podlagi (#322f2b). Tam temnejsi
-        // odtenek pade na 2,4:1, zato rabimo svetlejsega.
-        'terracotta-light': '#e0a184',
-        gold: '#d8aa50',
+        'terracotta-soft': '#f4e9e3',
+        // Stari imeni (pred prenovo) kot alias, da strani, ki jih prenova ne prepiše, ostanejo skladne.
+        cream: canvas,
+        beige: line,
       },
       fontFamily: {
-        serif: ['Fraunces Variable', 'Fraunces', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
-        sans: ['Inter Variable', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        serif: ['Playfair Display Variable', 'Playfair Display', 'Georgia', 'serif'],
+        sans: ['Plus Jakarta Sans Variable', 'Plus Jakarta Sans', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
       },
       maxWidth: {
-        content: '72rem',
+        content: '76rem',
       },
       boxShadow: {
-        soft: '0 1px 2px rgba(50,47,43,0.04), 0 8px 24px rgba(50,47,43,0.07)',
-        lift: '0 2px 4px rgba(50,47,43,0.06), 0 16px 40px rgba(50,47,43,0.12)',
+        lift: '0 10px 30px rgb(29 35 43 / 0.10)',
+        bar: '0 -6px 24px rgb(29 35 43 / 0.08)',
+      },
+      transitionTimingFunction: {
+        out: 'cubic-bezier(0.23, 1, 0.32, 1)',
+      },
+      transitionDuration: {
+        press: '140ms',
+        ui: '200ms',
+        overlay: '260ms',
       },
     },
   },

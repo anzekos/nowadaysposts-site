@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Motion budget iz DESIGN-LOCK.md: press 140 / UI 200 / overlay 260 ms, ease-out za vstope. */
+@layer base {
+  :root {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-canvas text-ink;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid theme('colors.terracotta');
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Edini primarni gumb na strani (CTA na Amazon in glavni CTA-ji). */
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-terracotta px-5 text-sm font-semibold text-surface transition-[background-color,transform] duration-ui ease-out hover:bg-terracotta-dark active:scale-[0.97];
+  }
+  .btn-secondary {
+    @apply inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full px-5 text-sm font-semibold text-ink ring-1 ring-inset ring-ink/20 transition-[background-color,transform] duration-ui ease-out hover:bg-line/60 active:scale-[0.97];
+  }
+  .chip {
+    @apply inline-flex min-h-10 shrink-0 items-center whitespace-nowrap rounded-full bg-surface px-4 text-sm font-medium text-ink ring-1 ring-inset ring-line transition-colors duration-ui ease-out hover:ring-ink/30;
+  }
+  .chip-active {
+    @apply inline-flex min-h-10 shrink-0 items-center whitespace-nowrap rounded-full bg-ink px-4 text-sm font-medium text-surface;
+  }
+  /* Vodoravna vrsta s snapom (tirnica izdelkov, čipi na telefonu). */
+  .rail {
+    @apply flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain pb-2;
+    scrollbar-width: none;
+  }
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+  .rail > * {
+    @apply shrink-0 snap-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}

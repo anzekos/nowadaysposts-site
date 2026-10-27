@@ -1,0 +1,31 @@
+---
+/**
+ * Phosphor ikone (regular), uvožene kot surov SVG ob buildu. Ena družina na celi strani.
+ * Nova ikona: dodaj uvoz in vnos v ICONS.
+ */
+import arrowUpRight from '@phosphor-icons/core/assets/regular/arrow-up-right.svg?raw';
+import arrowRight from '@phosphor-icons/core/assets/regular/arrow-right.svg?raw';
+import arrowLeft from '@phosphor-icons/core/assets/regular/arrow-left.svg?raw';
+import caretDown from '@phosphor-icons/core/assets/regular/caret-down.svg?raw';
+import list from '@phosphor-icons/core/assets/regular/list.svg?raw';
+import x from '@phosphor-icons/core/assets/regular/x.svg?raw';
+import check from '@phosphor-icons/core/assets/regular/check.svg?raw';
+import envelope from '@phosphor-icons/core/assets/regular/envelope-simple.svg?raw';
+
+const ICONS = {
+  'arrow-up-right': arrowUpRight,
+  'arrow-right': arrowRight,
+  'arrow-left': arrowLeft,
+  'caret-down': caretDown,
+  list,
+  x,
+  check,
+  envelope,
+};
+
+const { name, class: cls = 'h-4 w-4', ...rest } = Astro.props;
+const raw = ICONS[name] ?? '';
+const svg = raw.replace('<svg ', `<svg class="${cls}" aria-hidden="true" focusable="false" `);
+---
+
+<Fragment set:html={svg} {...rest} />

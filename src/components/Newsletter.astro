@@ -1,48 +1,57 @@
 ---
-// Newsletter prijava — POSTa na Cloudflare Pages funkcijo /subscribe,
-// ki doda email v Brevo listo. API ključ NI v brskalniku (je v funkciji).
+// Newsletter prijava: POSTa na Cloudflare Pages funkcijo /subscribe, ki doda email v Brevo
+// listo. API ključ NI v brskalniku (je v funkciji). Obvestilo ob gumbu je pravno besedilo
+// (GDPR člen 13) in ostane dobesedno enako.
+import Icon from './Icon.astro';
 ---
 
-<section class="mx-auto max-w-content px-4 py-12">
-  <div class="rounded-3xl bg-ink px-6 py-10 text-center shadow-lift sm:px-12 sm:py-14">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-terracotta-light">Free · a few times a week</p>
-    <h2 class="mt-3 font-serif text-3xl font-bold text-white">Never miss the find everyone's pinning</h2>
-    <p class="mx-auto mt-3 max-w-xl text-white/70">
-      The prettiest trending home pieces, hand-picked and sent straight to your inbox —
-      before they sell out. No spam, unsubscribe anytime.
-    </p>
-    <form id="newsletter-form" class="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row" novalidate>
-      <label for="newsletter-email" class="sr-only">Email address</label>
-      <input
-        id="newsletter-email"
-        type="email"
-        name="email"
-        required
-        autocomplete="email"
-        placeholder="you@email.com"
-        class="w-full rounded-full border-0 px-5 py-3 text-ink placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-terracotta"
-      />
-      <button
-        type="submit"
-        class="shrink-0 rounded-full bg-terracotta px-7 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-ink disabled:opacity-60"
-      >
-        Subscribe
-      </button>
-    </form>
-    <p id="newsletter-msg" class="mt-3 min-h-[1.25rem] text-sm text-white/80" role="status" aria-live="polite"></p>
+<section class="mx-auto max-w-content px-4 py-14 sm:py-20" aria-labelledby="newsletter-title">
+  <div class="grid gap-8 rounded-xl bg-ink px-6 py-10 sm:px-10 md:grid-cols-[1fr_1.1fr] md:items-center md:gap-12 md:py-12">
+    <div>
+      <h2 id="newsletter-title" class="font-serif text-3xl font-semibold leading-tight text-surface sm:text-4xl">
+        Never miss the find everyone's pinning
+      </h2>
+      <p class="mt-3 max-w-md leading-relaxed text-surface/75">
+        The trending home pieces, hand-picked and sent to your inbox a few times a week.
+        No spam, unsubscribe anytime.
+      </p>
+    </div>
 
-    {/*
-      GDPR clen 13: obvestilo mora biti dano ob zbiranju, ne sele na pravni
-      strani. Privolitev je dana s pritiskom na gumb, zato mora tik ob gumbu
-      pisati, kdo obdeluje naslov in kako se od tega odjavis.
-    */}
-    <p class="mx-auto mt-4 max-w-md text-xs leading-relaxed text-white/70">
-      By subscribing you agree we may email you the newsletter. Your address is stored with
-      <a href="https://www.brevo.com/legal/privacypolicy/" rel="noopener" target="_blank" class="underline hover:text-white">Brevo</a>
-      on servers in the EU, used for nothing else, and deleted the moment you unsubscribe. One click
-      in any email does that. More in our
-      <a href="/privacy" class="underline hover:text-white">privacy policy</a>.
-    </p>
+    <div>
+      <form id="newsletter-form" class="flex flex-col gap-2.5 sm:flex-row" novalidate>
+        <label for="newsletter-email" class="sr-only">Email address</label>
+        <input
+          id="newsletter-email"
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="you@email.com"
+          class="min-h-12 w-full rounded-full border-0 bg-surface px-5 text-ink placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-terracotta"
+        />
+        <button
+          type="submit"
+          class="inline-flex min-h-12 shrink-0 items-center justify-center gap-1.5 rounded-full bg-terracotta px-6 text-sm font-semibold text-surface transition-[background-color,transform] duration-ui ease-out hover:bg-terracotta-dark active:scale-[0.97] disabled:opacity-60"
+        >
+          <Icon name="envelope" class="h-4 w-4" />
+          Subscribe
+        </button>
+      </form>
+      <p id="newsletter-msg" class="mt-3 min-h-[1.25rem] text-sm text-surface/85" role="status" aria-live="polite"></p>
+
+      {/*
+        GDPR clen 13: obvestilo mora biti dano ob zbiranju, ne sele na pravni
+        strani. Privolitev je dana s pritiskom na gumb, zato mora tik ob gumbu
+        pisati, kdo obdeluje naslov in kako se od tega odjavis.
+      */}
+      <p class="mt-2 max-w-md text-xs leading-relaxed text-surface/70">
+        By subscribing you agree we may email you the newsletter. Your address is stored with
+        <a href="https://www.brevo.com/legal/privacypolicy/" rel="noopener" target="_blank" class="underline hover:text-surface">Brevo</a>
+        on servers in the EU, used for nothing else, and deleted the moment you unsubscribe. One click
+        in any email does that. More in our
+        <a href="/privacy" class="underline hover:text-surface">privacy policy</a>.
+      </p>
+    </div>
   </div>
 </section>
 
@@ -57,7 +66,7 @@
       const email = (input?.value || '').trim();
       if (!email) return;
       btn.disabled = true;
-      msg.textContent = 'Subscribing…';
+      msg.textContent = 'Subscribing...';
       try {
         const r = await fetch('/subscribe', {
           method: 'POST',
@@ -66,7 +75,7 @@
         });
         const data = await r.json().catch(() => ({}));
         if (r.ok && data.ok) {
-          msg.textContent = "🎉 You're in! Get ready — your inbox is about to get a whole lot prettier. 🏡";
+          msg.textContent = "You're in. The next edit lands in your inbox soon.";
           form.reset();
         } else {
           msg.textContent = data.error || 'Something went wrong. Please try again.';

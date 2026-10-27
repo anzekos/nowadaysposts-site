@@ -1,53 +1,79 @@
 ---
-const { product, eager = false } = Astro.props;
+/**
+ * Kartica izdelka. Cela slika in ime peljeta na Amazon, gumb pove cilj ("Shop on Amazon").
+ * Ocen ni: Associates §2(t) brez Creators/PA API ne dovoli prikaza Amazonovih ocen.
+ *
+ * variant="grid"  -> kompaktna (mreže, tirnice): slika 3:4, ime v 2 vrsticah, gumb
+ * variant="wide"  -> blog "The finds": slika levo, opis, gumb
+ */
+import Icon from './Icon.astro';
+import { displayName, photoFor, isNew } from '../lib/catalog.js';
+
+const { product, eager = false, variant = 'grid' } = Astro.props;
 // rel="nofollow sponsored" je OBVEZEN za affiliate povezave (Google + Amazon TOS)
 const REL = 'nofollow sponsored noopener';
-
-// badge: "New" (dodano v zadnjih 10 dneh ob buildu). Zvezdic in "Top Rated" ni več:
-// Associates §2(t) ne dovoli prikaza Amazonovih ocen brez Creators/PA API (2026-10-27).
-const ageDays = product.addedAt
-  ? (Date.now() - new Date(product.addedAt).getTime()) / 86400000
-  : Infinity;
-const badge = ageDays <= 10 ? 'New' : null;
-const badgeClass = 'bg-terracotta text-white';
+const name = displayName(product.title);
+const photo = photoFor(product);
+const scene = photo.kind === 'scene';
+const fresh = isNew(product);
+// Opis brez prvega stavka, če je ta trend statistika ("X is up 300% this month, and ...").
+const sentences = (product.description || '').trim().split(/(?<=[.!?])\s+/);
+if (sentences.length > 1 && /\bup \d[\d,]*\s?%/i.test(sentences[0])) sentences.shift();
+const blurb = sentences.join(' ');
 ---
 
-<article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-soft ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-lift">
-  <a href={product.link} target="_blank" rel={REL} class="relative block overflow-hidden">
-    {badge && (
-      <span class={`absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-xs font-semibold shadow-soft ${badgeClass}`}>
-        {badge}
-      </span>
-    )}
-    <img
-      src={product.image}
-      alt={product.title}
-      width="600"
-      height="600"
-      loading={eager ? 'eager' : 'lazy'}
-      class="aspect-square w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-    />
-  </a>
-  <div class="flex flex-1 flex-col p-5">
-    <span class="mb-2 text-xs font-semibold uppercase tracking-wide text-terracotta">
-      {product.category}
-    </span>
-    <h3 class="font-serif text-lg font-medium leading-snug text-ink">
-      <a href={product.link} target="_blank" rel={REL} class="hover:underline">
-        {product.title}
-      </a>
-    </h3>
-    <p class="mt-3 flex-1 text-sm leading-relaxed text-muted line-clamp-3">{product.description}</p>
-    <a
-      href={product.link}
-      target="_blank"
-      rel={REL}
-      class="mt-5 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-terracotta px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-terracotta-dark"
-    >
-      Check price on Amazon
-      <svg class="h-4 w-4 transition group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd" />
-      </svg>
+{variant === 'grid' ? (
+  <article class="group flex flex-col">
+    <a href={product.link} target="_blank" rel={REL} class="relative block overflow-hidden rounded-xl bg-surface ring-1 ring-line" tabindex="-1" aria-hidden="true">
+      <img
+        src={photo.src}
+        alt=""
+        width={photo.w}
+        height={photo.h}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        class:list={[
+          'aspect-[3/4] w-full transition-transform duration-500 ease-out group-hover:scale-[1.03]',
+          scene ? 'object-cover' : 'object-contain p-3',
+        ]}
+      />
     </a>
-  </div>
-</article>
+    <div class="flex flex-1 flex-col pt-3">
+      {/* Kategorije ugiba build_site_data iz naslova in so pogosto napačne, zato jih kartica ne kaže. */}
+      {fresh && <p class="text-xs font-semibold text-terracotta">New</p>}
+      <h3 class:list={['line-clamp-2 text-[0.95rem] font-semibold leading-snug text-ink sm:text-base', fresh && 'mt-1']}>
+        <a href={product.link} target="_blank" rel={REL} title={product.title} class="hover:underline">{name}</a>
+      </h3>
+      <div class="mt-auto pt-3">
+        <a href={product.link} target="_blank" rel={REL} class="btn-primary w-full whitespace-nowrap px-2 text-[0.8125rem]">
+          Shop on Amazon
+          <Icon name="arrow-up-right" class="h-3.5 w-3.5" />
+        </a>
+      </div>
+    </div>
+  </article>
+) : (
+  <article class="group grid grid-cols-[7.5rem_1fr] gap-4 rounded-xl bg-surface p-3 ring-1 ring-line sm:grid-cols-[10rem_1fr] sm:p-4">
+    <a href={product.link} target="_blank" rel={REL} class="block overflow-hidden rounded-lg bg-surface" tabindex="-1" aria-hidden="true">
+      <img
+        src={photo.src}
+        alt=""
+        width={photo.w}
+        height={photo.h}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        class:list={['aspect-[3/4] w-full', scene ? 'object-cover' : 'object-contain p-2']}
+      />
+    </a>
+    <div class="flex min-w-0 flex-col">
+      <h3 class="text-base font-semibold leading-snug text-ink">
+        <a href={product.link} target="_blank" rel={REL} title={product.title} class="hover:underline">{name}</a>
+      </h3>
+      {blurb && <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">{blurb}</p>}
+      <a href={product.link} target="_blank" rel={REL} class="btn-primary mt-3 self-start">
+        Shop on Amazon
+        <Icon name="arrow-up-right" class="h-4 w-4" />
+      </a>
+    </div>
+  </article>
+)}

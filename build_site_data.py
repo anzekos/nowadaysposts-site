@@ -185,6 +185,11 @@ def main():
     print(f"\n[build] ✓ {len(products)} produktov skupaj (kumulativno) -> src/data/products.json")
     print(f"[build] slike: {made} novih, {skipped} obstoječih, {failed} napak -> public/img/")
 
+    # WebP za mreže na strani (Flow scena, če obstaja, sicer izdelek na belem) + photos.json.
+    # Idempotentno: naredi samo manjkajoče, zato je dnevni zagon hiter.
+    from build_site_images import build as build_images
+    build_images()
+
 
 if __name__ == "__main__":
     main()

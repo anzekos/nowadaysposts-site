@@ -11,13 +11,15 @@ import { SITE } from '../site.config.mjs';
   ta karkoli izbral. To je natanko tisto, zaradi cesar so v Nemciji padle
   sodbe proti vgrajenim Google Fonts.
 */
-import '@fontsource-variable/fraunces';
-import '@fontsource-variable/inter';
+import '@fontsource-variable/playfair-display';
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
 
-const { title, description, noindex = false } = Astro.props;
-const pageTitle = title ?? `${SITE.name} — ${SITE.tagline}`;
+const { title, description, noindex = false, image } = Astro.props;
+const pageTitle = title ?? `${SITE.name}: ${SITE.tagline}`;
 const pageDesc = description ?? SITE.description ?? SITE.tagline;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
+const ogImage = image ? new URL(image, Astro.site ?? SITE.url).href : null;
 ---
 
 <!doctype html>
@@ -25,7 +27,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f6f1e9" />
+    <meta name="theme-color" content="#f5f6f7" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
@@ -39,12 +41,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
     <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content="summary_large_image" />
     <GoogleAnalytics />
   </head>
-  <body class="min-h-screen bg-cream font-sans text-ink antialiased">
+  <body class="min-h-screen bg-canvas font-sans text-ink antialiased">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-surface">
+      Skip to content
+    </a>
     <Header />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <Footer />

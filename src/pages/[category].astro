@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ProductCard from '../components/ProductCard.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import CategoryChips from '../components/CategoryChips.astro';
 import Newsletter from '../components/Newsletter.astro';
-import products from '../data/products.json';
+import { products, byNewest } from '../lib/catalog.js';
 import { SITE } from '../site.config.mjs';
 
 export function getStaticPaths() {
@@ -19,59 +20,32 @@ export function getStaticPaths() {
 const { items, name } = Astro.props;
 const { category } = Astro.params;
 
-// najvišje ocenjeni najprej — najmočnejši produkti na vrhu strani
-const sorted = [...items].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+// Najnovejši najprej: na vrhu so izdelki z našimi lifestyle scenami in aktualni trendi.
+const sorted = [...items].sort(byNewest);
 
-// ostale kategorije za cross-navigacijo
-const otherMap = new Map();
-for (const p of products) {
-  if (p.categorySlug === category) continue;
-  const c = otherMap.get(p.categorySlug) ?? { slug: p.categorySlug, name: p.category, count: 0 };
-  c.count++;
-  otherMap.set(p.categorySlug, c);
-}
-const others = [...otherMap.values()].sort((a, b) => b.count - a.count);
-
-const title = `${name} — ${SITE.name}`;
-const description = `Trending ${name.toLowerCase()} we love, handpicked from top-rated Amazon bestsellers.`;
+const title = `${name} | ${SITE.name}`;
+const description = `Trending ${name.toLowerCase()} we love, handpicked from Amazon bestsellers. ${items.length} ${items.length === 1 ? 'find' : 'finds'}, newest first.`;
 ---
 
-<Layout title={title} description={description}>
-  <section class="mx-auto max-w-content px-4 py-12">
-    <nav class="mb-4 text-sm text-muted">
-      <a href="/" class="hover:text-ink">Home</a> <span class="px-1">/</span>
-      <a href="/shop" class="hover:text-ink">Shop</a> <span class="px-1">/</span>
+<Layout title={title} description={description} image={sorted[0]?.image}>
+  <section class="mx-auto max-w-content px-4 pb-6 pt-8 sm:pt-12">
+    <nav class="mb-3 text-sm text-muted" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-ink">Home</a> <span class="px-1" aria-hidden="true">/</span>
+      <a href="/shop" class="hover:text-ink">Shop</a> <span class="px-1" aria-hidden="true">/</span>
       <span class="text-ink">{name}</span>
     </nav>
-    <h1 class="font-serif text-4xl font-bold text-ink">{name}</h1>
+    <h1 class="font-serif text-4xl font-semibold text-ink sm:text-5xl">{name}</h1>
     <p class="mt-2 max-w-2xl text-muted">
-      {description} Highest-rated first — {items.length} {items.length === 1 ? 'find' : 'finds'}.
+      Trending {name.toLowerCase()} we love, handpicked from Amazon bestsellers. {items.length} {items.length === 1 ? 'find' : 'finds'}, newest first.
     </p>
-
-    <!-- cross-nav čipi -->
-    <div class="mt-6 flex flex-wrap gap-2.5">
-      <a
-        href="/shop"
-        class="rounded-full border border-ink/15 bg-white px-4 py-2 text-sm font-medium text-ink transition hover:border-terracotta hover:text-terracotta"
-      >
-        ← All finds
-      </a>
-      <span class="rounded-full bg-ink px-4 py-2 text-sm font-medium text-white">
-        {name} ({items.length})
-      </span>
-      {others.map((c) => (
-        <a
-          href={`/${c.slug}`}
-          class="rounded-full border border-ink/15 bg-white px-4 py-2 text-sm font-medium text-ink transition hover:border-terracotta hover:text-terracotta"
-        >
-          {c.name} ({c.count})
-        </a>
-      ))}
+    <p class="mt-1 text-xs text-muted">{SITE.disclosureShort}</p>
+    <div class="mt-6">
+      <CategoryChips active={category} />
     </div>
+  </section>
 
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {sorted.map((p, i) => <ProductCard product={p} eager={i < 3} />)}
-    </div>
+  <section class="mx-auto max-w-content px-4 pt-4" aria-label={name}>
+    <ProductGrid items={sorted} initial={24} step={24} />
   </section>
 
   <Newsletter />

@@ -1,0 +1,24 @@
+---
+/** Čipi kategorij: na telefonu ena vodoravna vrsta, na namizju se prelomijo. */
+import { products, categories as getCategories } from '../lib/catalog.js';
+
+const { active = 'all' } = Astro.props;
+const categories = getCategories();
+---
+
+<nav aria-label="Categories" class="-mx-4 px-4 sm:mx-0 sm:px-0">
+  <ul class="rail sm:flex-wrap sm:overflow-visible">
+    <li>
+      {active === 'all'
+        ? <span class="chip-active" aria-current="page">All ({products.length})</span>
+        : <a href="/shop" class="chip">All ({products.length})</a>}
+    </li>
+    {categories.map((c) => (
+      <li>
+        {active === c.slug
+          ? <span class="chip-active" aria-current="page">{c.name} ({c.count})</span>
+          : <a href={`/${c.slug}`} class="chip">{c.name} ({c.count})</a>}
+      </li>
+    ))}
+  </ul>
+</nav>
