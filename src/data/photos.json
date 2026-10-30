@@ -1091,6 +1091,12 @@
   "src": "/p/eucalyptus-glass-vase-centerpiece.webp",
   "w": 600
  },
+ "fall-eucalyptus-wreath-front-door-24-inch": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/fall-eucalyptus-wreath-front-door-24-inch.webp",
+  "w": 600
+ },
  "fall-hydrangea-wreath-front-door-porch": {
   "h": 600,
   "kind": "cutout",
@@ -1269,6 +1275,12 @@
   "h": 800,
   "kind": "scene",
   "src": "/p/frosted-berry-pinecone-christmas-tree-picks.webp",
+  "w": 600
+ },
+ "frosted-snowflake-mason-jar-christmas-centerpiece": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/frosted-snowflake-mason-jar-christmas-centerpiece.webp",
   "w": 600
  },
  "full-length-door-mirror-black-47x14": {
@@ -2039,6 +2051,12 @@
   "src": "/p/oval-acacia-wood-tray-handles-17x13.webp",
   "w": 600
  },
+ "over-the-door-organizer-hooks-two-baskets-black": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/over-the-door-organizer-hooks-two-baskets-black.webp",
+  "w": 600
+ },
  "oversized-boucle-reading-chair": {
   "h": 600,
   "kind": "cutout",
@@ -2187,6 +2205,12 @@
   "h": 600,
   "kind": "cutout",
   "src": "/p/pink-faux-pampas-grass-stems.webp",
+  "w": 600
+ },
+ "pink-flocked-christmas-tree-soap-dispenser": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/pink-flocked-christmas-tree-soap-dispenser.webp",
   "w": 600
  },
  "pink-scalloped-floral-washable-rug": {
@@ -2919,6 +2943,12 @@
   "h": 600,
   "kind": "cutout",
   "src": "/p/twin-xl-ruffle-comforter-dorm-blue.webp",
+  "w": 600
+ },
+ "two-tier-kitchen-counter-shelf-coffee-bar": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/two-tier-kitchen-counter-shelf-coffee-bar.webp",
   "w": 600
  },
  "two-tier-washer-dryer-folding-countertop": {
