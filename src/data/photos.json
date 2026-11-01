@@ -767,10 +767,22 @@
   "src": "/p/christmas-pinecone-soap-dispenser-bathroom.webp",
   "w": 600
  },
+ "christmas-stocking-holders-6-pack-metal-mantel": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/christmas-stocking-holders-6-pack-metal-mantel.webp",
+  "w": 600
+ },
  "christmas-stretch-fabric-door-cover-wreath": {
   "h": 800,
   "kind": "scene",
   "src": "/p/christmas-stretch-fabric-door-cover-wreath.webp",
+  "w": 600
+ },
+ "christmas-urn-fillers-prelit-outdoor-pine": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/christmas-urn-fillers-prelit-outdoor-pine.webp",
   "w": 600
  },
  "chrome-silver-vase-set-hollow-oval": {
@@ -1425,6 +1437,12 @@
   "h": 600,
   "kind": "cutout",
   "src": "/p/gold-table-lamps-set-living-room.webp",
+  "w": 600
+ },
+ "gold-tinsel-garland-72-feet-christmas-tree": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/gold-tinsel-garland-72-feet-christmas-tree.webp",
   "w": 600
  },
  "golden-eucalyptus-fall-wreath-front-door": {
@@ -2273,6 +2291,12 @@
   "src": "/p/plaid-twin-xl-dorm-bedding-blue-grey.webp",
   "w": 600
  },
+ "plant-stand-with-grow-light-8-tier-corner": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/plant-stand-with-grow-light-8-tier-corner.webp",
+  "w": 600
+ },
  "plug-in-crystal-chandelier-bedroom": {
   "h": 800,
   "kind": "scene",
@@ -2451,6 +2475,12 @@
   "h": 800,
   "kind": "scene",
   "src": "/p/round-openwork-coffee-table-corner-sofa.webp",
+  "w": 600
+ },
+ "round-storage-ottoman-set-of-2-cream-velvet": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/round-storage-ottoman-set-of-2-cream-velvet.webp",
   "w": 600
  },
  "round-woven-chargers-simple-fall-tablescape": {
