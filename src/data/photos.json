@@ -623,6 +623,12 @@
   "src": "/p/britrio-cocktail-neon-sign-bar-cart.webp",
   "w": 600
  },
+ "brown-gold-christmas-ornaments-taupe-frosted-12-piece": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/brown-gold-christmas-ornaments-taupe-frosted-12-piece.webp",
+  "w": 600
+ },
  "brown-ribbed-earth-tone-bathroom-set": {
   "h": 600,
   "kind": "cutout",
@@ -1649,6 +1655,12 @@
   "src": "/p/ivory-real-touch-foam-roses.webp",
   "w": 600
  },
+ "ivy-garland-with-lights-33ft-100-led-bedroom": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/ivy-garland-with-lights-33ft-100-led-bedroom.webp",
+  "w": 600
+ },
  "jute-braided-pouf-ottoman-boho": {
   "h": 600,
   "kind": "cutout",
@@ -2357,6 +2369,18 @@
   "src": "/p/pre-lit-cedar-christmas-garland-fireplace-mantle.webp",
   "w": 600
  },
+ "pre-lit-christmas-garland-9ft-pinecones-berries": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/pre-lit-christmas-garland-9ft-pinecones-berries.webp",
+  "w": 600
+ },
+ "pre-lit-christmas-wreath-22-inch-red-velvet-bow": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/pre-lit-christmas-wreath-22-inch-red-velvet-bow.webp",
+  "w": 600
+ },
  "pumpkin-utensil-holder-fall-kitchen-decor": {
   "h": 600,
   "kind": "cutout",
@@ -2649,6 +2673,12 @@
   "h": 600,
   "kind": "cutout",
   "src": "/p/sage-green-bathroom-rug-set.webp",
+  "w": 600
+ },
+ "sage-green-corduroy-throw-pillow-covers-set-of-4": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/sage-green-corduroy-throw-pillow-covers-set-of-4.webp",
   "w": 600
  },
  "sandstone-ceramic-bathroom-set": {
