@@ -797,6 +797,12 @@
   "src": "/p/christmas-door-sign-12-inch-round-red-snowman-welcome.webp",
   "w": 600
  },
+ "christmas-garland-mantel-9ft-real-touch-cedar-greenery": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/christmas-garland-mantel-9ft-real-touch-cedar-greenery.webp",
+  "w": 600
+ },
  "christmas-glass-votive-candle-holder-set-gold": {
   "h": 800,
   "kind": "scene",
@@ -1193,6 +1199,12 @@
   "src": "/p/eucalyptus-glass-vase-centerpiece.webp",
   "w": 600
  },
+ "fall-centerpiece-table-wood-box-pumpkins-peonies-maple-leaves": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/fall-centerpiece-table-wood-box-pumpkins-peonies-maple-leaves.webp",
+  "w": 600
+ },
  "fall-eucalyptus-wreath-front-door-24-inch": {
   "h": 800,
   "kind": "scene",
@@ -1251,6 +1263,12 @@
   "h": 600,
   "kind": "cutout",
   "src": "/p/faux-eucalyptus-pot-bathroom.webp",
+  "w": 600
+ },
+ "faux-eucalyptus-stems-6-realistic-greenery-branches-vase": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/faux-eucalyptus-stems-6-realistic-greenery-branches-vase.webp",
   "w": 600
  },
  "faux-fur-christmas-tree-skirt-36-inch-white-gold-snowflakes": {
@@ -2061,6 +2079,12 @@
   "h": 600,
   "kind": "cutout",
   "src": "/p/narrow-console-table-2-drawers.webp",
+  "w": 600
+ },
+ "narrow-console-table-32-inch-entryway-open-bottom-shelf": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/narrow-console-table-32-inch-entryway-open-bottom-shelf.webp",
   "w": 600
  },
  "narrow-white-bookshelf-small-space-dorm": {
@@ -3405,6 +3429,12 @@
   "h": 800,
   "kind": "scene",
   "src": "/p/warm-white-curtain-string-lights-bedroom.webp",
+  "w": 600
+ },
+ "washable-area-rug-8x10-blue-cream-abstract-non-slip": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/washable-area-rug-8x10-blue-cream-abstract-non-slip.webp",
   "w": 600
  },
  "washable-floral-vintage-rug-terracotta": {
