@@ -821,6 +821,12 @@
   "src": "/p/christmas-glass-votive-candle-holder-set-gold.webp",
   "w": 600
  },
+ "christmas-hand-towels-red-buffalo-plaid-snowman-set-of-2": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/christmas-hand-towels-red-buffalo-plaid-snowman-set-of-2.webp",
+  "w": 600
+ },
  "christmas-pillow-covers-18x18-4-red-buffalo-plaid": {
   "h": 800,
   "kind": "scene",
@@ -1233,6 +1239,12 @@
   "h": 600,
   "kind": "cutout",
   "src": "/p/eucalyptus-glass-vase-centerpiece.webp",
+  "w": 600
+ },
+ "expandable-drawer-organizer-bamboo-kitchen-tray-2-5-inch": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/expandable-drawer-organizer-bamboo-kitchen-tray-2-5-inch.webp",
   "w": 600
  },
  "fall-centerpiece-table-wood-box-pumpkins-peonies-maple-leaves": {
@@ -2669,6 +2681,12 @@
   "src": "/p/red-white-christmas-ornaments-34-piece-shatterproof.webp",
   "w": 600
  },
+ "reindeer-candle-holders-set-of-3-bronze-metal-tealight": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/reindeer-candle-holders-set-of-3-bronze-metal-tealight.webp",
+  "w": 600
+ },
  "reversible-sofa-slipcover-cozy": {
   "h": 600,
   "kind": "cutout",
@@ -3251,10 +3269,22 @@
   "src": "/p/throw-pillow-inserts-18x18.webp",
   "w": 600
  },
+ "top-hat-christmas-tree-topper-red-sequin-plaid-bow": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/top-hat-christmas-tree-topper-red-sequin-plaid-bow.webp",
+  "w": 600
+ },
  "torchiere-floor-lamp-living-room": {
   "h": 600,
   "kind": "cutout",
   "src": "/p/torchiere-floor-lamp-living-room.webp",
+  "w": 600
+ },
+ "towel-rack-for-bathroom-wall-mounted-black-rolled-towels": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/towel-rack-for-bathroom-wall-mounted-black-rolled-towels.webp",
   "w": 600
  },
  "travertine-bowl-entryway-console": {
