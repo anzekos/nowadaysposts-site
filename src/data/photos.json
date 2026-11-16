@@ -557,6 +557,12 @@
   "src": "/p/blanket-basket-living-room-108l-woven-cotton-rope.webp",
   "w": 600
  },
+ "blanket-ladder-6-tier-black-wood-rack-70-inch": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/blanket-ladder-6-tier-black-wood-rack-70-inch.webp",
+  "w": 600
+ },
  "blue-glass-bud-vase-set-12": {
   "h": 600,
   "kind": "cutout",
@@ -893,10 +899,22 @@
   "src": "/p/christmas-village-set-8-pc-white-ceramic-houses-gold-deer-lights.webp",
   "w": 600
  },
+ "christmas-window-candles-10-flameless-tapers-remote-timer": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/christmas-window-candles-10-flameless-tapers-remote-timer.webp",
+  "w": 600
+ },
  "chrome-silver-vase-set-hollow-oval": {
   "h": 800,
   "kind": "scene",
   "src": "/p/chrome-silver-vase-set-hollow-oval.webp",
+  "w": 600
+ },
+ "chunky-knit-throw-blanket-cream-chenille-50x60": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/chunky-knit-throw-blanket-cream-chenille-50x60.webp",
   "w": 600
  },
  "chunky-knit-throw-blanket-taupe": {
@@ -1485,6 +1503,12 @@
   "h": 600,
   "kind": "cutout",
   "src": "/p/full-length-door-mirror-black-47x14.webp",
+  "w": 600
+ },
+ "gallery-wall-frame-set-19-black-frames-3-sizes": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/gallery-wall-frame-set-19-black-frames-3-sizes.webp",
   "w": 600
  },
  "gallery-wall-frame-set-of-10-corner-gallery-wall": {
@@ -3459,6 +3483,12 @@
   "h": 600,
   "kind": "cutout",
   "src": "/p/vintage-chinoiserie-vase-set-3.webp",
+  "w": 600
+ },
+ "vintage-coat-rack-wall-mounted-whitewashed-wood-10-hooks": {
+  "h": 800,
+  "kind": "scene",
+  "src": "/p/vintage-coat-rack-wall-mounted-whitewashed-wood-10-hooks.webp",
   "w": 600
  },
  "vintage-cocktail-poster-set-bar-cart": {
